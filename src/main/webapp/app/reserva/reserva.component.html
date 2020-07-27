@@ -1,0 +1,31 @@
+<form [formGroup]="formulario">
+    <div class="form-group">
+      <label for="Nombre">Nombre</label>
+      <input type="email" class="form-control" id="Nombre" aria-describedby="emailHelp" placeholder="Ingrese nombre" formControlName="nombre" >
+      <small id="emailHelp" class="form-text text-muted">Ingrese su nombre real.</small>
+    </div>
+    
+    <div class="form-group">
+        <label for="Apellido">Apellido</label>
+        <input type="apellido" class="form-control" id="Apellido" aria-describedby="emailHelp" placeholder="Ingrese apellido" formControlName="apellido" >
+        <small id="emailHelp" class="form-text text-muted">Ingrese su apellido real</small>
+      </div>
+
+      <div class="form-group">
+        <label for="Documento">Documento</label>
+        <input type="documento" class="form-control" id="Documento" aria-describedby="emailHelp" placeholder="Ingrese  numero de documento" formControlName="documento" >
+        <small id="emailHelp" class="form-text text-muted">Ingrese su niumero de documento</small>
+      </div>
+
+      <div class="form-group">
+        <label for="Fecha">Fecha</label>
+        <input type="fecha" class="form-control" id="fecha" aria-describedby="emailHelp" placeholder="yyyy-mm-dd" formControlName="fecha" ngbDatepicker #d="ngbDatepicker" >
+        <small id="emailHelp" class="form-text text-muted">Ingrese la fecha solicitada</small>
+      </div>
+
+    <button type="submit" class="btn btn-primary"  (click)="abrirDialogo()"  >Submit</button>
+   
+    <pre>{{miTurno | json}}</pre>  
+
+</form>
+
