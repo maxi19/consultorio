@@ -18,13 +18,14 @@
       </div>
 
       <div class="form-group">
-        <jhi-ngbd-datepicker-popup [parentForm]="formulario" [formLabel]="'Fecha de turno:'" [formControlName]="'fecha'" ></jhi-ngbd-datepicker-popup>
+        <jhi-ngbd-datepicker-popup [parentForm]="formulario" [formLabel]="'Fecha de turno:'" [formControlName]="'fecha'" [disabled]="!formulario.valid" ></jhi-ngbd-datepicker-popup>
         <small id="emailHelp" class="form-text text-muted">Ingrese la fecha solicitada</small>
       </div>
 
     <button type="submit" class="btn btn-primary"  (click)="abrirDialogo()"  >Submit</button>
-   <jhi-ngbd-modal-basic></jhi-ngbd-modal-basic>
+
     <pre>{{miTurno | json}}</pre>  
 
 </form>
 
+  <button (click)="mostraarBootstrapModal()">mostrar bootstrap modal </button>
