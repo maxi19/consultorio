@@ -44,10 +44,9 @@ export class ReservaComponent implements OnInit {
   abrirDialogo(): void {
     const nombre = this.formulario.controls['nombre'].value;
     const apellido = this.formulario.controls['apellido'].value;
-    //const fecha = this.formulario.controls['fecha'].value;
+    const fecha = this.formulario.controls['fecha'].value;
     const rango = '2';
-
-    this.miTurno = new Turno('nada', nombre, apellido, rango);
+    this.miTurno = new Turno(fecha, nombre, apellido, rango);
 
     // const dialogo = this.dialog.open(DialogoTurno, {
     //  data: new Turno(fecha , nombre ,apellido,rango)

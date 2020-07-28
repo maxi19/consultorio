@@ -18,8 +18,7 @@
       </div>
 
       <div class="form-group">
-        <label for="Fecha">Fecha</label>
-        <input type="fecha" class="form-control" id="fecha" aria-describedby="emailHelp" placeholder="yyyy-mm-dd" formControlName="fecha" ngbDatepicker #d="ngbDatepicker" >
+        <jhi-ngbd-datepicker-popup [parentForm]="formulario" [formLabel]="'Fecha de turno:'" [formControlName]="'fecha'" ></jhi-ngbd-datepicker-popup>
         <small id="emailHelp" class="form-text text-muted">Ingrese la fecha solicitada</small>
       </div>
 
