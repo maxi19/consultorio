@@ -15,6 +15,7 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
 import { ReservaComponent } from './reserva/reserva.component';
 import { NgbdDatepickerPopupComponent } from './reserva/ngbd-datepicker-popup/ngbd-datepicker-popup.component';
+import { NgbdModalBasicComponent } from './reserva/ngbd-modal-basic/ngbd-modal-basic.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,7 @@ import { NgbdDatepickerPopupComponent } from './reserva/ngbd-datepicker-popup/ng
     ConsultorioEntityModule,
     ConsultorioAppRoutingModule,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, ReservaComponent, NgbdDatepickerPopupComponent],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, ReservaComponent, NgbdDatepickerPopupComponent, NgbdModalBasicComponent],
   bootstrap: [MainComponent],
 })
 export class ConsultorioAppModule {}
