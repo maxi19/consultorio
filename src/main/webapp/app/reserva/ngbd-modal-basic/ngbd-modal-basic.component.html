@@ -1,10 +1,8 @@
-<p>
-  bootstrap conten modal
-</p>
-<tr *ngFor="let rango of rangos; let i = index">
-  <td>{{rango.value}}</td>
-  <td>{{rango.id}}</td>
-</tr>
+  Seleccione disponibilidad horaria para la fecha : {{fecha|date:"dd/MM/yyyy"}}
+
+<div *ngFor="let rango of rangos; let i = index">
+  <button  (click)="emitirEvento(rango)">{{rango.value}}</button>
+</div>
 
 
 <button (click)="cerrarModal(false)"> Cerrar Modal</button>

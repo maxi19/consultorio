@@ -13,10 +13,17 @@ export class NgbdModalBasicComponent  {
 
   @Input()  cerrarModal!: (parametro: any) => void ;
   @Input()  rangos !: Array<Rango>
+  @Input()  fecha !: string
   @Output() salida : EventEmitter<Rango>= new EventEmitter();
+
+  idRango !: string;
+
 
   constructor( ) {}
 
+  emitirEvento(rango : Rango):void {
+    this.salida.emit(rango);
+  }
 
 
 }

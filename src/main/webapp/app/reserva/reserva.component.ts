@@ -16,7 +16,7 @@ import { ArrayType } from '@angular/compiler';
 export class ReservaComponent implements OnInit {
   formulario!: FormGroup;
   miTurno!: Turno;
-
+  rangoSeleccionado !: Rango;
   constructor(
     private formBuilder: FormBuilder,
     private calendar: NgbCalendar,
@@ -49,26 +49,7 @@ export class ReservaComponent implements OnInit {
   }
 
   abrirDialogo(): void {
-    const nombre = this.formulario.controls['nombre'].value;
-    const apellido = this.formulario.controls['apellido'].value;
-    const fecha = this.formulario.controls['fecha'].value;
-    const rango = '2';
-    this.miTurno = new Turno(fecha, nombre, apellido, rango);
-  
-
-
-    // const dialogo = this.dialog.open(DialogoTurno, {
-    //  data: new Turno(fecha , nombre ,apellido,rango)
-    // });
-
-    // dialogo.afterClosed().subscribe(turno => {
-    //  if (turno != undefined)
-    //   this.agregar(turno);
-    //});
-  }
-
-
-  mostraarBootstrapModal():void{
+   
     const opts = {
       windowClass:'myCustomModal'
     };
@@ -79,13 +60,36 @@ export class ReservaComponent implements OnInit {
     {id: '1', value: 'Sentence 1'},
     {id: '2', value: 'Sentence 2'},
     {id: '3', value: 'Sentence 3'},
-    {id: '4', value: 'Sentenc4 '},
-];
+    {id: '4', value: 'Sentence 4'},
+    ];
+  const nombre = this.formulario.controls['nombre'].value;
+  const apellido = this.formulario.controls['apellido'].value;
+  const documento =  this.formulario.controls['documento'].value;
+  const fecha = this.formulario.controls['fecha'].value;
+
   modalReffNgBots.componentInstance.rangos = listaDeRangos;
-   
+  modalReffNgBots.componentInstance.fecha = fecha;
+
+  this.miTurno = new Turno(fecha, nombre, apellido, documento,this.rangoSeleccionado);
+
+
+  modalReffNgBots.componentInstance.salida.subscribe((respusta: Rango) => {
+    this.rangoSeleccionado = respusta;
+    modalReffNgBots.close();
+  });
+  
+
    modalReffNgBots.componentInstance.cerrarModal = () => {
     modalReffNgBots.close();
    }
+
+
+
+  }
+
+
+  mostraarBootstrapModal():void{
+   
 
 
   }
