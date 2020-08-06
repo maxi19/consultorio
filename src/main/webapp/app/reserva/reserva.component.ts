@@ -40,10 +40,10 @@ export class ReservaComponent implements OnInit {
 
   creaarFormulario(): void {
     this.formulario = this.formBuilder.group({
-      nombre: ['sarasa', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      apellido: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(13)]],
-      documento: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(13)]],
-      fecha: ['', [Validators.required]],
+      nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      apellido: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      documento: ['', [Validators.pattern("^[0-9]*$"), Validators.required, Validators.minLength(6), Validators.maxLength(17)]],
+      fecha: ['', [Validators.required,Validators.maxLength(10)]],
       validate: '',
     });
   }
@@ -52,6 +52,7 @@ export class ReservaComponent implements OnInit {
   cargarRangos(): void {
     this.rangoService.query().subscribe((res: HttpResponse<IRango[]>) => (this.rangos = res.body || []));
   }
+
   ngOnInit(): void {
     this.creaarFormulario();
     this.setearValoresDefault();

@@ -1,25 +1,26 @@
 <form [formGroup]="formulario">
     <div class="form-group">
       <label for="Nombre">Nombre</label>
-      <input type="email" class="form-control" id="Nombre" aria-describedby="emailHelp" placeholder="Ingrese nombre" formControlName="nombre" >
-      <small id="emailHelp" class="form-text text-muted">Ingrese su nombre real.</small>
+      <input type="nombre" class="form-control" id="Nombre" aria-describedby="emailHelp" placeholder="Ingrese nombre" formControlName="nombre" >
+      <small  class="form-text text-muted">Ingrese su nombre real.</small>
     </div>
     
     <div class="form-group">
         <label for="Apellido">Apellido</label>
         <input type="apellido" class="form-control" id="Apellido" aria-describedby="emailHelp" placeholder="Ingrese apellido" formControlName="apellido" >
-        <small id="emailHelp" class="form-text text-muted">Ingrese su apellido real</small>
+        <small  class="form-text text-muted">Ingrese su apellido real</small>
       </div>
 
       <div class="form-group">
         <label for="Documento">Documento</label>
         <input type="documento" class="form-control" id="Documento" aria-describedby="emailHelp" placeholder="Ingrese  numero de documento" formControlName="documento" >
-        <small id="emailHelp" class="form-text text-muted">Ingrese su niumero de documento</small>
+        <small class="form-text text-muted">Ingrese su niumero de documento</small>
       </div>
 
       <div class="form-group">
-        <jhi-ngbd-datepicker-popup [parentForm]="formulario" [formLabel]="'Fecha de turno:'" [formControlName]="'fecha'"  ></jhi-ngbd-datepicker-popup>
-        <small id="emailHelp" class="form-text text-muted">Ingrese la fecha solicitada</small>
+        <label for="Fecha">Fecha</label>
+        <jhi-ngbd-datepicker-popup [parentForm]="formulario" [formLabel]="'Fecha de turno:'" [formControlName]="'fecha'"></jhi-ngbd-datepicker-popup>
+        <small  class="form-text text-muted">Ingrese la fecha solicitada</small>
       </div>
 
     <button type="submit" class="btn btn-primary"  (click)="abrirDialogo()" [disabled]="!formulario.valid"  >Submit</button>
