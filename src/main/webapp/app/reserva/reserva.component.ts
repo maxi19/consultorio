@@ -7,7 +7,9 @@ import { Turno } from './turno';
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Rango } from './Rango';
 import { ArrayType } from '@angular/compiler';
-
+import {IRango} from "../shared/model/rango.model";
+import { HttpResponse } from '@angular/common/http';
+import {RangoService } from "../entities/rango/rango.service";
 @Component({
   selector: 'jhi-reserva',
   templateUrl: './reserva.component.html',
@@ -17,9 +19,12 @@ export class ReservaComponent implements OnInit {
   formulario!: FormGroup;
   miTurno!: Turno;
   rangoSeleccionado !: Rango;
+  rangos?: IRango[];
+
   constructor(
     private formBuilder: FormBuilder,
     private calendar: NgbCalendar,
+    private rangoService: RangoService,
     private ngbModalRef: NgbModal
     ) {}
 
@@ -43,6 +48,10 @@ export class ReservaComponent implements OnInit {
     });
   }
 
+  
+  cargarRangos(): void {
+    this.rangoService.query().subscribe((res: HttpResponse<IRango[]>) => (this.rangos = res.body || []));
+  }
   ngOnInit(): void {
     this.creaarFormulario();
     this.setearValoresDefault();
@@ -56,18 +65,13 @@ export class ReservaComponent implements OnInit {
 
    const modalReffNgBots = this.ngbModalRef.open(NgbdModalBasicComponent,opts);
    
-   const listaDeRangos:Array<Rango> = [
-    {id: '1', value: 'Sentence 1'},
-    {id: '2', value: 'Sentence 2'},
-    {id: '3', value: 'Sentence 3'},
-    {id: '4', value: 'Sentence 4'},
-    ];
+
   const nombre = this.formulario.controls['nombre'].value;
   const apellido = this.formulario.controls['apellido'].value;
   const documento =  this.formulario.controls['documento'].value;
   const fecha = this.formulario.controls['fecha'].value;
 
-  modalReffNgBots.componentInstance.rangos = listaDeRangos;
+  modalReffNgBots.componentInstance.rangos = this.rangos;
   modalReffNgBots.componentInstance.fecha = fecha;
 
   this.miTurno = new Turno(fecha, nombre, apellido, documento,this.rangoSeleccionado);
