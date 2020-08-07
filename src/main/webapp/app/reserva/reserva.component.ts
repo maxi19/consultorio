@@ -10,16 +10,33 @@ import { ArrayType } from '@angular/compiler';
 import {IRango} from "../shared/model/rango.model";
 import { HttpResponse } from '@angular/common/http';
 import {RangoService } from "../entities/rango/rango.service";
+
+
+
+
 @Component({
   selector: 'jhi-reserva',
   templateUrl: './reserva.component.html',
   styleUrls: ['./reserva.component.scss'],
 })
+
+
 export class ReservaComponent implements OnInit {
   formulario!: FormGroup;
   miTurno!: Turno;
   rangoSeleccionado !: Rango;
   rangos?: IRango[];
+  sucursales= [
+  {
+    id:"2",
+    nombre:"Pablo Noguez"
+  },
+  {
+    id:"1",
+    nombre:"Grand Bourg"    
+  }
+]
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,6 +50,7 @@ export class ReservaComponent implements OnInit {
       nombre: '',
       apellido: '',
       documento: '',
+      sucursal:'',
       fecha: new Date(),
       validate: false,
     });
@@ -43,7 +61,8 @@ export class ReservaComponent implements OnInit {
       nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       apellido: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       documento: ['', [Validators.pattern("^[0-9]*$"), Validators.required, Validators.minLength(6), Validators.maxLength(17)]],
-      fecha: ['', [Validators.required,Validators.maxLength(10)]],
+      sucursal: ["seleccione", [ Validators.required]],
+      fecha: ['', [Validators.required]],
       validate: '',
     });
   }
@@ -99,3 +118,5 @@ export class ReservaComponent implements OnInit {
 
   }
 }
+
+
