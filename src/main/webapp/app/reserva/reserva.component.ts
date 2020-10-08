@@ -51,7 +51,7 @@ export class ReservaComponent implements OnInit {
       apellido: '',
       documento: '',
       sucursal:'',
-      fecha: new Date(),
+      fecha: '',
       validate: false,
     });
   }
@@ -62,8 +62,8 @@ export class ReservaComponent implements OnInit {
       apellido: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       documento: ['', [Validators.pattern("^[0-9]*$"), Validators.required, Validators.minLength(6), Validators.maxLength(17)]],
       sucursal: ["seleccione", [ Validators.required]],
-      fecha: ['', [Validators.required]],
-      validate: '',
+      fecha: ['', [  Validators.minLength(10),Validators.required]],
+      validate:'',
     });
   }
 
@@ -85,7 +85,6 @@ export class ReservaComponent implements OnInit {
 
    const modalReffNgBots = this.ngbModalRef.open(NgbdModalBasicComponent,opts);
    
-
   const nombre = this.formulario.controls['nombre'].value;
   const apellido = this.formulario.controls['apellido'].value;
   const documento =  this.formulario.controls['documento'].value;
@@ -96,26 +95,19 @@ export class ReservaComponent implements OnInit {
 
   this.miTurno = new Turno(fecha, nombre, apellido, documento,this.rangoSeleccionado);
 
-
   modalReffNgBots.componentInstance.salida.subscribe((respusta: Rango) => {
     this.rangoSeleccionado = respusta;
     modalReffNgBots.close();
   });
   
-
    modalReffNgBots.componentInstance.cerrarModal = () => {
     modalReffNgBots.close();
    }
 
-
-
   }
-
 
   mostraarBootstrapModal():void{
    
-
-
   }
 }
 

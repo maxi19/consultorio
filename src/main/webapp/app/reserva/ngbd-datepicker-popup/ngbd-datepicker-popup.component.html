@@ -1,6 +1,6 @@
-<div [formGroup]="parentForm">
+<div [formGroup]="miParentForm">
     <div class="input-group">
-        <input  class="form-control" placeholder="yyyy-mm-dd"  name="dp"  formControlName="formControlName" ngbDatepicker #d="ngbDatepicker">
+        <input  class="form-control" placeholder="yyyy-mm-dd"  name="dp"   ngbDatepicker #d="ngbDatepicker">
         <div class="input-group-append">
             <button class="btn btn-primary" (click)="d.toggle()" type="button" >Seleccione fecha del turno</button>
         </div>

@@ -9,8 +9,8 @@ import { FormGroup } from '@angular/forms';
 export class NgbdDatepickerPopupComponent {  
   model!: NgbDateStruct;
 
-  @Input() parentForm !: FormGroup;
-  @Input() formControlName !: string;
-  @Input() formLabel !: string;
+  @Input() miParentForm!: FormGroup;
+  @Input() miFormControlName!: string;
+  @Input() miFormLabel!: string;
 
 }
