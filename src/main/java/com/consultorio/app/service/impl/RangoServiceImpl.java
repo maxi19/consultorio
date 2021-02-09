@@ -7,7 +7,7 @@ import com.consultorio.app.service.dto.RangoDTO;
 import com.consultorio.app.service.mapper.RangoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,8 +25,10 @@ public class RangoServiceImpl implements RangoService {
 
     private final Logger log = LoggerFactory.getLogger(RangoServiceImpl.class);
 
+    @Autowired
     private final RangoRepository rangoRepository;
 
+    @Autowired
     private final RangoMapper rangoMapper;
 
     public RangoServiceImpl(RangoRepository rangoRepository, RangoMapper rangoMapper) {
