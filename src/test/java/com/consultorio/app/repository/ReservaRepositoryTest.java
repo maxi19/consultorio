@@ -19,18 +19,18 @@ public class ReservaRepositoryTest {
 
 	@Autowired
 	ReservaRepository reservaRepository;
-	
+
 
 	@Test
 	public void dadoUnaReservaSePersiste() {
-		Reserva reserva = new Reserva();		
-		reserva.setApellidos("guzman");
-		reserva.setNombres("maxi");
+		Reserva reserva = new Reserva();
+		reserva.setApellido("guzman");
+		reserva.setNombre("maxi");
 		reservaRepository.save(reserva);
-		
+
 	}
-	
-	
-	
-	
+
+
+
+
 }

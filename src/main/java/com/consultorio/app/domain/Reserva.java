@@ -20,64 +20,43 @@ public class Reserva {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	private String nombres;
-	
-	private String apellidos;
-	
-	private Date fecha;
-	
-	private Time hora;
-	
-	private Character tiempo;
 
-	public String getNombres() {
-		return nombres;
-	}
+	private String nombre;
 
-	public void setNombres(String nombres) {
-		this.nombres = nombres;
-	}
+	private String apellido;
 
-	public String getApellidos() {
-		return apellidos;
-	}
+    private String documento;
 
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
 
-	public Date getFecha() {
-		return fecha;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public Time getHora() {
-		return hora;
-	}
+    public String getApellido() {
+        return apellido;
+    }
 
-	public void setHora(Time hora) {
-		this.hora = hora;
-	}
+    public String getDocumento() {
+        return documento;
+    }
 
-	public Character getTiempo() {
-		return tiempo;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setTiempo(Character tiempo) {
-		this.tiempo = tiempo;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
 }

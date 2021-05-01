@@ -8,6 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ArrayType } from '@angular/compiler';
 import { HttpResponse } from '@angular/common/http';
+import { ReservaService } from './reserva.service';
 
 @Component({
   selector: 'jhi-reserva',
@@ -18,7 +19,7 @@ export class ReservaComponent implements OnInit {
   formulario!: FormGroup;
   miTurno!: Turno;
 
-  constructor(private formBuilder: FormBuilder, private calendar: NgbCalendar, private ngbModalRef: NgbModal) {}
+  constructor(private formBuilder: FormBuilder, private calendar: NgbCalendar, private ngbModalRef: NgbModal, reserva: ReservaService) {}
 
   setearValoresDefault(): void {
     this.formulario.setValue({
