@@ -1,8 +1,6 @@
 package com.consultorio.app;
 
 import com.consultorio.app.config.ApplicationProperties;
-import com.consultorio.app.service.mapper.RangoMapper;
-import com.consultorio.app.service.mapper.RangoMapperImpl;
 
 import io.github.jhipster.config.DefaultProfileUtil;
 import io.github.jhipster.config.JHipsterConstants;
@@ -98,11 +96,5 @@ public class ConsultorioApp {
             contextPath,
             env.getActiveProfiles());
     }
-    
-    @Bean
-    public RangoMapper modelMapper() {
-       RangoMapper modelMapper = new RangoMapperImpl();
-       return modelMapper;
-    }
-    
+        
 }

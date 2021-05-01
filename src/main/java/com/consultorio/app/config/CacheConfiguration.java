@@ -51,7 +51,6 @@ public class CacheConfiguration {
             createCache(cm, com.consultorio.app.domain.User.class.getName());
             createCache(cm, com.consultorio.app.domain.Authority.class.getName());
             createCache(cm, com.consultorio.app.domain.User.class.getName() + ".authorities");
-            createCache(cm, com.consultorio.app.domain.Rango.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

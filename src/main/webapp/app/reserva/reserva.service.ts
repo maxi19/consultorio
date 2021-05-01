@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { map, shareReplay } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption, Pagination } from 'app/shared/util/request-util';
 
-import { Turno } from "./Turno";
-import { Rango } from "./Rango";
+import { Turno } from './Turno';
 
 @Injectable({ providedIn: 'root' })
-export class reservaService {
+export class ReservaService {
   public resourceUrl = SERVER_API_URL + 'api/reserva';
 
   constructor(private http: HttpClient) {}
