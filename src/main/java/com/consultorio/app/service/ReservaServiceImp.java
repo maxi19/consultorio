@@ -8,6 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.Instant;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 @Service
 public class ReservaServiceImp implements ReservaService{
@@ -20,14 +24,13 @@ public class ReservaServiceImp implements ReservaService{
     }
 
     @Override
-    @Transactional
     public ReservaDto persistir(ReservaDto reserva) {
-     try {
-         this.reservaRepository.save(new Reserva());
-     }catch (Exception e)
-     {
-         return null;
-     }
+         Reserva rev = new Reserva();
+         rev.setNombre(reserva.getNombre());
+         rev.setApellido(reserva.getApellido());
+         rev.setDocumento(reserva.getDocumento());
+         rev.setFecha(new GregorianCalendar());
+         this.reservaRepository.saveAndFlush(rev);
      return  reserva;
     }
 }
