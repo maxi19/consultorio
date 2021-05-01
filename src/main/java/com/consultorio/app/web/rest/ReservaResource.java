@@ -1,9 +1,12 @@
 package com.consultorio.app.web.rest;
 
+import com.consultorio.app.helpers.RangoHorario;
 import com.consultorio.app.service.ReservaService;
 import com.consultorio.app.service.dto.ReservaDto;
 import com.consultorio.app.service.mapper.ReservaMapper;
 import com.consultorio.app.web.rest.vm.ReservaVM;
+import com.netflix.discovery.util.StringUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/externos")
@@ -30,6 +34,7 @@ public class ReservaResource {
     reservaDto.setNombre(reservaVM.getNombre());
     reservaDto.setApellido(reservaVM.getApellido());
     reservaDto.setDocumento(reservaVM.getDocumento());
+    reservaDto.setSucursal(reservaVM.getSucursal());
     reservaService.persistir( reservaDto);
         ResponseEntity<ReservaDto> reservaDtoResponseEntity = new ResponseEntity<ReservaDto>(reservaDto, HttpStatus.CREATED);
         return reservaDtoResponseEntity;
@@ -37,8 +42,13 @@ public class ReservaResource {
 
 
     @GetMapping("/tutorials/{fecha}")
-    public ResponseEntity<List<ReservaDto>> dameHorarios(@PathVariable("fecha") String id) {
-     return null;
+    public ResponseEntity<Map<Integer, String>> dameHorarios(@PathVariable("fecha") String fecha) {
+        String miFecha;
+        if (!StringUtils.isEmpty(fecha)){
+             miFecha = fecha;
+        }
+
+     return new ResponseEntity (RangoHorario.dameTodosLosRangos() , HttpStatus.OK);
     }
 /*
     @GetMapping("/tutorials/{id}")

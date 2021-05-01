@@ -14,6 +14,12 @@ public class ReservaDto  {
 
     private String documento;
 
+    private int sucursal;
+
+    public int getSucursal() {
+        return sucursal;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -38,4 +44,7 @@ public class ReservaDto  {
         this.documento = documento;
     }
 
+    public void setSucursal(int sucursal) {
+        this.sucursal = sucursal;
+    }
 }

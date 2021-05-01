@@ -19,15 +19,21 @@ public class Reserva implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+    @Column(name = "nombre")
 	private String nombre;
 
+    @Column(name = "apellido")
 	private String apellido;
 
+    @Column(name = "documento")
     private String documento;
 
     @Column(name = "fecha", updatable = false, nullable = false)
     @Temporal(TemporalType.DATE)
     private Calendar fecha;
+
+    @Column(name = "sucursal")
+    private int sucursal;
 
     public Long getId() {
         return id;
@@ -49,6 +55,14 @@ public class Reserva implements Serializable {
         return fecha;
     }
 
+    public int getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(int sucursal) {
+        this.sucursal = sucursal;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -68,4 +82,5 @@ public class Reserva implements Serializable {
     public void setFecha(Calendar fecha) {
         this.fecha = fecha;
     }
+
 }

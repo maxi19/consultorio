@@ -17,6 +17,8 @@ public class ReservaVM {
     @NotBlank
     private String documento;
 
+    private int sucursal;
+
     public ReservaVM(){
         super();
     }
@@ -31,6 +33,14 @@ public class ReservaVM {
 
     public String getDocumento() {
         return documento;
+    }
+
+    public int getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(int sucursal) {
+        this.sucursal = sucursal;
     }
 
     public void setNombre(String nombre) {

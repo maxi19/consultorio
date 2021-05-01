@@ -30,6 +30,7 @@ public class ReservaServiceImp implements ReservaService{
          rev.setApellido(reserva.getApellido());
          rev.setDocumento(reserva.getDocumento());
          rev.setFecha(new GregorianCalendar());
+         rev.setSucursal(reserva.getSucursal());
          this.reservaRepository.saveAndFlush(rev);
      return  reserva;
     }

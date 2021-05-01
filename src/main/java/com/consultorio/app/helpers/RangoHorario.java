@@ -5,12 +5,12 @@ import java.util.Map;
 
 public enum RangoHorario {
 
-    Rango1(1,"dfewfd"),
-    Rango2(2,"dfewfd"),
-    Rango3(3,"dfewfd"),
-    Rango4(4,"dfewfd");
+    Rango1(1,"09 : 00 hs - 09 : 30 hs"),
+    Rango2(2,"09 : 30 hs - 10 : 00 hs"),
+    Rango3(3,"10 : 00 hs - 10 : 30 hs"),
+    Rango4(4,"10 : 30 hs - 11 : 00 hs");
 
-    private static Map<Integer, RangoHorario> valueToTextMapping;
+    private static Map<Integer, String> valueToTextMapping;
 
     private final int rango;
     private final String descripcion;
@@ -30,10 +30,16 @@ public enum RangoHorario {
     private static void initMapping(){
         valueToTextMapping = new HashMap<>();
         for(RangoHorario s : values()){
-            valueToTextMapping.put(s.getRango(), s);
+            valueToTextMapping.put(s.getRango(), s.getDescripcion());
         }
     }
-    public static RangoHorario getStatus(Integer i){
+
+    public static  Map<Integer, String> dameTodosLosRangos(){
+        initMapping();
+        return valueToTextMapping;
+    }
+
+    public static String dameRangoDescripcion(Integer i){
         if(valueToTextMapping == null){
             initMapping();
         }
