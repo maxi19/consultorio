@@ -41,13 +41,12 @@ public class ReservaResource {
     }
 
 
-    @GetMapping("/tutorials/{fecha}")
+    @GetMapping("/horarios/{fecha}")
     public ResponseEntity<Map<Integer, String>> dameHorarios(@PathVariable("fecha") String fecha) {
         String miFecha;
         if (!StringUtils.isEmpty(fecha)){
              miFecha = fecha;
         }
-
      return new ResponseEntity (RangoHorario.dameTodosLosRangos() , HttpStatus.OK);
     }
 /*

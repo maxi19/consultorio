@@ -6,9 +6,10 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption, Pagination } from 'app/shared/util/request-util';
 
 import { Turno } from './Turno';
+import { Horario } from './Horario';
 
 @Injectable({ providedIn: 'root' })
-export class ReservaService {
+export class HorarioService {
   public resourceUrl = SERVER_API_URL + 'externos/registrar';
 
   constructor(private http: HttpClient) {}
@@ -21,10 +22,13 @@ export class ReservaService {
     return this.http.put<Turno>(this.resourceUrl, turno);
   }
 
-  find(login: string): Observable<Turno> {
-    return this.http.get<Turno>(`${this.resourceUrl}/${login}`);
+  /*buscarhorario(fecha: string): Observable<Map <Horario> > {
+  //  return this.http.get<Turno>(`${this.resourceUrl}/${fecha}`);
+    return this.http.get(this.resourceUrl +"/"+ fecha).pipe(
+      
+    )
   }
-
+*/
   query(req?: Pagination): Observable<HttpResponse<Turno[]>> {
     const options = createRequestOption(req);
     return this.http.get<Turno[]>(this.resourceUrl, { params: options, observe: 'response' });
