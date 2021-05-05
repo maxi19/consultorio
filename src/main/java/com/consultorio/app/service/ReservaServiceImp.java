@@ -1,6 +1,7 @@
 package com.consultorio.app.service;
 
 import com.consultorio.app.domain.Reserva;
+import com.consultorio.app.helpers.TurnosHelper;
 import com.consultorio.app.repository.ReservaRepository;
 import com.consultorio.app.service.dto.ReservaDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 @Service
 public class ReservaServiceImp implements ReservaService{
@@ -31,7 +33,19 @@ public class ReservaServiceImp implements ReservaService{
          rev.setDocumento(reserva.getDocumento());
          rev.setFecha(new GregorianCalendar());
          rev.setSucursal(reserva.getSucursal());
+         rev.setFecha_turno(new GregorianCalendar());
+         rev.setCodigo(TurnosHelper.generarCodigo(reserva.getDocumento(),1));
          this.reservaRepository.saveAndFlush(rev);
      return  reserva;
     }
+
+    public  boolean existeReserva(String documento) {
+        List<Reserva> reservas =  reservaRepository.findByDocumento(documento);
+        if (reservas.isEmpty()){
+            return false;
+        }
+        return true;
+    }
+
+
 }

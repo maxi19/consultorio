@@ -27,6 +27,7 @@ public enum RangoHorario {
     public String getDescripcion() {
         return descripcion;
     }
+
     private static void initMapping(){
         valueToTextMapping = new HashMap<>();
         for(RangoHorario s : values()){

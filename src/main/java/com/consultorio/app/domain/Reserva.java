@@ -35,6 +35,13 @@ public class Reserva implements Serializable {
     @Column(name = "sucursal")
     private int sucursal;
 
+    @Column(name = "fecha_reservacion", updatable = false, nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Calendar fecha_turno;
+
+    @Column(name = "codigo")
+    private String codigo;
+
     public Long getId() {
         return id;
     }
@@ -57,6 +64,14 @@ public class Reserva implements Serializable {
 
     public int getSucursal() {
         return sucursal;
+    }
+
+    public Calendar getFecha_turno() {
+        return fecha_turno;
+    }
+
+    public String getCodigo() {
+        return codigo;
     }
 
     public void setSucursal(int sucursal) {
@@ -83,4 +98,11 @@ public class Reserva implements Serializable {
         this.fecha = fecha;
     }
 
+    public void setFecha_turno(Calendar fecha_turno) {
+        this.fecha_turno = fecha_turno;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 }

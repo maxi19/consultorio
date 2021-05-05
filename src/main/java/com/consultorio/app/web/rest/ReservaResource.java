@@ -35,9 +35,15 @@ public class ReservaResource {
     reservaDto.setApellido(reservaVM.getApellido());
     reservaDto.setDocumento(reservaVM.getDocumento());
     reservaDto.setSucursal(reservaVM.getSucursal());
-    reservaService.persistir( reservaDto);
-        ResponseEntity<ReservaDto> reservaDtoResponseEntity = new ResponseEntity<ReservaDto>(reservaDto, HttpStatus.CREATED);
+    reservaDto.setFechaTurno(reservaVM.getFechaTurno());
+    reservaDto.setCodigoHora(reservaVM.getCodigoHora());
+    if (reservaService.existeReserva(reservaDto.getDocumento())){
+        ResponseEntity<ReservaDto> reservaDtoResponseEntity = new ResponseEntity<ReservaDto>(reservaDto, HttpStatus.UNPROCESSABLE_ENTITY);
         return reservaDtoResponseEntity;
+    }
+    reservaService.persistir( reservaDto);
+    ResponseEntity<ReservaDto> reservaDtoResponseEntity = new ResponseEntity<ReservaDto>(reservaDto, HttpStatus.CREATED);
+    return reservaDtoResponseEntity;
     }
 
 
