@@ -6,7 +6,7 @@ import com.consultorio.app.service.mapper.ReservaMapper;
 
 import java.util.List;
 
-public class ReservaMapperImp implements ReservaMapper {
+public class ReservaMapperImp implements ReservaMapper  {
 
     @Override
     public Reserva toEntity(ReservaDto dto) {

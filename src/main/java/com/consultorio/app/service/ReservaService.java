@@ -11,4 +11,7 @@ public interface ReservaService {
 
      public ReservaDto persistir(ReservaDto reserva);
 
+     public boolean existeReserva(String dcumento);
+
+
 }
