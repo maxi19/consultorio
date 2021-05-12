@@ -33,7 +33,11 @@ public class ReservaServiceImp implements ReservaService{
          rev.setDocumento(reserva.getDocumento());
          rev.setFecha(new GregorianCalendar());
          rev.setSucursal(reserva.getSucursal());
-         rev.setFecha_turno(new GregorianCalendar());
+            GregorianCalendar gc = new GregorianCalendar();
+            gc.set(GregorianCalendar.YEAR, reserva.getFechaTurno().getYear());
+            gc.set(GregorianCalendar.MONTH, reserva.getFechaTurno().getMonthValue()-1);
+            gc.set(GregorianCalendar.DATE, reserva.getFechaTurno().getDayOfMonth());
+         rev.setFecha_turno(gc);
          rev.setCodigo(TurnosHelper.generarCodigo(reserva.getDocumento(),1));
          this.reservaRepository.saveAndFlush(rev);
      return  reserva;
