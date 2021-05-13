@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ArrayType } from '@angular/compiler';
 import { HttpResponse } from '@angular/common/http';
 import { ReservaService } from './reserva.service';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'jhi-reserva',
@@ -54,7 +55,7 @@ export class ReservaComponent implements OnInit {
   }
 
   generarReserva(): void {
-    this.reservaService
+    /*this.reservaService
       .create({
         nombre: this.formulario.get('nombre')!.value,
         apellido: this.formulario.get('apellido')!.value,
@@ -64,5 +65,11 @@ export class ReservaComponent implements OnInit {
         codigoHora: 1,
       })
       .subscribe();
+*/
+    swal({
+      title: 'Good job!',
+      text: 'You clicked the button!',
+      icon: 'success',
+    });
   }
 }
