@@ -12,4 +12,6 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long>{
 
     List<Reserva> findByDocumento(String documento);
 
+    List<Reserva> findByCodigo(String codigo);
+
 }

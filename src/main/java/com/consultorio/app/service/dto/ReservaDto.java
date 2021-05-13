@@ -1,12 +1,7 @@
 package com.consultorio.app.service.dto;
 
-import com.consultorio.app.domain.Reserva;
-import com.consultorio.app.service.mapper.EntityMapper;
-import com.consultorio.app.service.mapper.ReservaMapper;
-
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
-import java.util.List;
 
 public class ReservaDto  {
 

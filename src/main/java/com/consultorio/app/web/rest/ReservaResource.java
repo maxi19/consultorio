@@ -3,9 +3,9 @@ package com.consultorio.app.web.rest;
 import com.consultorio.app.helpers.RangoHorario;
 import com.consultorio.app.service.ReservaService;
 import com.consultorio.app.service.dto.ReservaDto;
-import com.consultorio.app.service.mapper.ReservaMapper;
+import com.consultorio.app.service.mapper.ReservaMapapperVmDto;
+import com.consultorio.app.service.mapper.implemented.ReservaMapperVmDtoImp;
 import com.consultorio.app.web.rest.vm.ReservaVM;
-import com.netflix.discovery.util.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -23,6 +22,8 @@ public class ReservaResource {
     @Autowired
     private ReservaService reservaService;
 
+    private ReservaMapapperVmDto dtoMapper = new ReservaMapperVmDtoImp();
+
     public ReservaResource(ReservaService reservaService){
         this.reservaService = reservaService;
     }
@@ -30,14 +31,8 @@ public class ReservaResource {
     @PostMapping("/registrar")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ReservaDto> registerReserva(@Valid @RequestBody ReservaVM reservaVM) {
-    ReservaDto reservaDto = new ReservaDto();
-    reservaDto.setNombre(reservaVM.getNombre());
-    reservaDto.setApellido(reservaVM.getApellido());
-    reservaDto.setDocumento(reservaVM.getDocumento());
-    reservaDto.setSucursal(reservaVM.getSucursal());
-    reservaDto.setFechaTurno(reservaVM.getFechaTurno());
-    reservaDto.setCodigoHora(reservaVM.getCodigoHora());
-    if (reservaService.existeReserva(reservaDto.getDocumento())){
+    ReservaDto reservaDto = dtoMapper.toDto(reservaVM);
+    if (reservaService.existeReservaPorDocumento(reservaDto.getDocumento())){
         ResponseEntity<ReservaDto> reservaDtoResponseEntity = new ResponseEntity<ReservaDto>(reservaDto, HttpStatus.UNPROCESSABLE_ENTITY);
         return reservaDtoResponseEntity;
     }
