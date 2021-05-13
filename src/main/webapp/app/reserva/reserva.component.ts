@@ -19,7 +19,12 @@ export class ReservaComponent implements OnInit {
   formulario!: FormGroup;
   miTurno!: Turno;
 
-  constructor(private formBuilder: FormBuilder, private calendar: NgbCalendar, private ngbModalRef: NgbModal, reserva: ReservaService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private calendar: NgbCalendar,
+    private ngbModalRef: NgbModal,
+    public reservaService: ReservaService
+  ) {}
 
   setearValoresDefault(): void {
     this.formulario.setValue({
@@ -37,7 +42,7 @@ export class ReservaComponent implements OnInit {
       nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       apellido: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       documento: ['', [Validators.pattern('^[0-9]*$'), Validators.required, Validators.minLength(6), Validators.maxLength(17)]],
-      sucursal: ['seleccione', [Validators.required]],
+      // sucursal: ['seleccione', [Validators.required]],
       fecha: ['', [Validators.minLength(10), Validators.required]],
       validate: '',
     });
@@ -46,5 +51,18 @@ export class ReservaComponent implements OnInit {
   ngOnInit(): void {
     this.creaarFormulario();
     this.setearValoresDefault();
+  }
+
+  generarReserva(): void {
+    this.reservaService
+      .create({
+        nombre: this.formulario.get('nombre')!.value,
+        apellido: this.formulario.get('apellido')!.value,
+        documento: this.formulario.get('documento')!.value,
+        sucursal: '1',
+        fechaTurno: this.formulario.get('fecha')!.value,
+        codigoHora: 1,
+      })
+      .subscribe();
   }
 }
