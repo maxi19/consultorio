@@ -6,6 +6,7 @@ import com.consultorio.app.service.ReservaService;
 import com.consultorio.app.service.dto.ReservaDto;
 import com.consultorio.app.service.mapper.ReservaMapperDtoEntity;
 import com.consultorio.app.service.mapper.implemented.ReservaMapperDtoEntityImp;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
@@ -37,7 +38,7 @@ public class ReservaServiceImp implements ReservaService {
     }
 
     public  boolean existeReservaPorHorarioYFecha(String horario,Calendar fecha) {
-        List<Reserva> reservas =  reservaRepository.findByHorarioAndFechaTurno(horario,fecha);
+        List<Reserva> reservas =  reservaRepository.findByHorarioAndFechaTurno(StringUtils.upperCase(horario),fecha);
         if (reservas.isEmpty()){
             return false;
         }
