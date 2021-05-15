@@ -19,6 +19,8 @@ public class ReservaDto  {
     @NotBlank
     private String codigoHora;
 
+    private String horario;
+
     public int getSucursal() {
         return sucursal;
     }
@@ -43,6 +45,10 @@ public class ReservaDto  {
         return codigoHora;
     }
 
+    public String getHorario() {
+        return horario;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -65,5 +71,9 @@ public class ReservaDto  {
 
     public void setCodigoHora(String codigoHora) {
         this.codigoHora = codigoHora;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
     }
 }

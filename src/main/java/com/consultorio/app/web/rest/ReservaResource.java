@@ -1,6 +1,7 @@
 package com.consultorio.app.web.rest;
 
 import com.consultorio.app.helpers.RangoHorario;
+import com.consultorio.app.service.HorarioService;
 import com.consultorio.app.service.ReservaService;
 import com.consultorio.app.service.dto.ReservaDto;
 import com.consultorio.app.service.mapper.ReservaMapapperVmDto;
@@ -13,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Map;
 
 @RestController
@@ -22,27 +25,42 @@ public class ReservaResource {
     @Autowired
     private ReservaService reservaService;
 
+    @Autowired
+    private HorarioService horarioService;
+
     private ReservaMapapperVmDto dtoMapper = new ReservaMapperVmDtoImp();
 
-    public ReservaResource(ReservaService reservaService){
+    public ReservaResource(ReservaService reservaService, HorarioService horarioService){
         this.reservaService = reservaService;
+        this.horarioService = horarioService;
     }
 
     @PostMapping("/registrar")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ReservaDto> registerReserva(@Valid @RequestBody ReservaVM reservaVM) {
     ReservaDto reservaDto = dtoMapper.toDto(reservaVM);
-    if (reservaService.existeReservaPorDocumento(reservaDto.getDocumento())){
+
+    /*if (reservaService.existeReservaPorDocumento(reservaDto.getDocumento())){
         ResponseEntity<ReservaDto> reservaDtoResponseEntity = new ResponseEntity<ReservaDto>(reservaDto, HttpStatus.UNPROCESSABLE_ENTITY);
         return reservaDtoResponseEntity;
-    }
-    reservaService.persistir( reservaDto);
-    ResponseEntity<ReservaDto> reservaDtoResponseEntity = new ResponseEntity<ReservaDto>(reservaDto, HttpStatus.CREATED);
-    return reservaDtoResponseEntity;
+    }*/
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.set(GregorianCalendar.YEAR, reservaDto.getFechaTurno().getYear());
+        gc.set(GregorianCalendar.MONTH, reservaDto.getFechaTurno().getMonthValue()-1);
+        gc.set(GregorianCalendar.DATE, reservaDto.getFechaTurno().getDayOfMonth());
+        Calendar fechaTurno = gc;
+
+        if (reservaService.existeReservaPorHorarioYFecha(reservaDto.getCodigoHora(),fechaTurno)){
+            ResponseEntity<ReservaDto> reservaDtoResponseEntity = new ResponseEntity<ReservaDto>(reservaDto, HttpStatus.UNPROCESSABLE_ENTITY);
+            return reservaDtoResponseEntity;
+        }
+        reservaService.persistir( reservaDto);
+        ResponseEntity<ReservaDto> reservaDtoResponseEntity = new ResponseEntity<ReservaDto>(reservaDto, HttpStatus.CREATED);
+        return reservaDtoResponseEntity;
     }
 
 
-    @GetMapping("/horarios/{fecha}")
+    @GetMapping("/consultarfecha/{fecha}")
     public ResponseEntity<Map<Integer, String>> dameHorarios(@PathVariable("fecha") String fecha) {
         String miFecha;
         if (!StringUtils.isEmpty(fecha)){

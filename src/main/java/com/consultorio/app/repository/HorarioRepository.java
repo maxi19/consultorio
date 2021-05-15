@@ -1,0 +1,12 @@
+package com.consultorio.app.repository;
+
+import com.consultorio.app.domain.Horario;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface HorarioRepository  extends JpaRepository<Horario, String> {
+
+
+
+}

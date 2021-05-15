@@ -1,9 +1,7 @@
 package com.consultorio.app.domain;
 
 import java.io.Serializable;
-import java.sql.Time;
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.persistence.*;
 
@@ -37,10 +35,14 @@ public class Reserva implements Serializable {
 
     @Column(name = "fecha_reservacion", updatable = false, nullable = false)
     @Temporal(TemporalType.DATE)
-    private Calendar fecha_turno;
+    private Calendar fechaTurno;
 
     @Column(name = "codigo")
     private String codigo;
+
+    @Column(name = "horario")
+    private String horario;
+
 
     public Long getId() {
         return id;
@@ -66,12 +68,16 @@ public class Reserva implements Serializable {
         return sucursal;
     }
 
-    public Calendar getFecha_turno() {
-        return fecha_turno;
+    public Calendar getFechaTurno() {
+        return fechaTurno;
     }
 
     public String getCodigo() {
         return codigo;
+    }
+
+    public String getHorario() {
+        return horario;
     }
 
     public void setSucursal(int sucursal) {
@@ -98,11 +104,15 @@ public class Reserva implements Serializable {
         this.fecha = fecha;
     }
 
-    public void setFecha_turno(Calendar fecha_turno) {
-        this.fecha_turno = fecha_turno;
+    public void setFechaTurno(Calendar fechaTurno) {
+        this.fechaTurno = fechaTurno;
     }
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
     }
 }

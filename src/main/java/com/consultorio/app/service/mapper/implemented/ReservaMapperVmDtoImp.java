@@ -4,13 +4,20 @@ import com.consultorio.app.service.dto.ReservaDto;
 import com.consultorio.app.service.mapper.ReservaMapapperVmDto;
 import com.consultorio.app.web.rest.vm.ReservaVM;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReservaMapperVmDtoImp implements ReservaMapapperVmDto {
 
     @Override
     public ReservaVM toEntity(ReservaDto dto) {
-        return null;
+        ReservaVM reservaVM = new ReservaVM();
+        reservaVM.setNombre(dto.getNombre());
+        reservaVM.setDocumento(dto.getDocumento());
+        reservaVM.setSucursal(dto.getSucursal());
+        reservaVM.setCodigoHora(dto.getCodigoHora());
+        reservaVM.setFechaTurno(dto.getFechaTurno());
+        return reservaVM;
     }
 
     @Override
@@ -22,16 +29,28 @@ public class ReservaMapperVmDtoImp implements ReservaMapapperVmDto {
         reservaDto.setSucursal(entity.getSucursal());
         reservaDto.setFechaTurno(entity.getFechaTurno());
         reservaDto.setCodigoHora(entity.getCodigoHora());
+        reservaDto.setHorario(entity.getCodigoHora());
         return reservaDto;
     }
 
     @Override
-    public List<ReservaVM> toEntity(List<ReservaDto> dtoList) {
-        return null;
+    public List<ReservaVM> toEntity(List<ReservaDto> dtoList)
+    {
+        List<ReservaVM> reservasVM = new ArrayList<>();
+        for (ReservaDto dto : dtoList) {
+            ReservaVM vm = toEntity(dto);
+            reservasVM.add(vm);
+        }
+        return reservasVM;
     }
 
     @Override
     public List<ReservaDto> toDto(List<ReservaVM> entityList) {
-        return null;
+        List<ReservaDto> reservasDto = new ArrayList<>();
+        for (ReservaVM vm : entityList) {
+            ReservaDto dto = toDto(vm);
+            reservasDto.add(dto);
+        }
+        return reservasDto;
     }
 }
