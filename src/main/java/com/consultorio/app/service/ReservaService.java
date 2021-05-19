@@ -1,6 +1,8 @@
 package com.consultorio.app.service;
 
 import com.consultorio.app.service.dto.ReservaDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,6 @@ public interface ReservaService {
 
      public List<ReservaDto> buscarPorFecha(Calendar fechaTurno);
 
-
+    public Page<ReservaDto> obtenerTodos(Pageable pageable);
 
 }

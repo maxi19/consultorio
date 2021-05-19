@@ -1,5 +1,8 @@
 package com.consultorio.app.repository;
 
+import com.consultorio.app.domain.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.consultorio.app.domain.Reserva;
@@ -15,8 +18,9 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long>{
 
     List<Reserva> findByCodigo(String codigo);
 
-    List<Reserva>  findByHorarioAndFechaTurno ( String horario, Calendar fechaTurno );
+    List<Reserva> findByHorarioAndFechaTurno ( String horario, Calendar fechaTurno );
 
     List<Reserva> findByFechaTurno(Calendar fechaTurno);
 
+    Page<Reserva> findAll(Pageable pageable);
 }

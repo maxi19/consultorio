@@ -6,7 +6,11 @@ import com.consultorio.app.service.ReservaService;
 import com.consultorio.app.service.dto.ReservaDto;
 import com.consultorio.app.service.mapper.ReservaMapperDtoEntity;
 import com.consultorio.app.service.mapper.implemented.ReservaMapperDtoEntityImp;
+import com.google.common.base.Converter;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
@@ -49,6 +53,23 @@ public class ReservaServiceImp implements ReservaService {
     public List<ReservaDto> buscarPorFecha(Calendar fechaTurno) {
         List<ReservaDto> reservas = reservaMapperDtoEntity.toDto(reservaRepository.findByFechaTurno(fechaTurno));
         return reservas;
+    }
+
+    @Override
+    public Page<ReservaDto> obtenerTodos(Pageable pageable) {
+         Page<Reserva> page = reservaRepository.findAll(pageable);
+         Page<ReservaDto> pageDto = page.map(new Converter<Reserva, ReservaDto>() {
+             @Override
+             protected ReservaDto doForward(Reserva reserva) {
+                return reservaMapperDtoEntity.toDto(reserva);
+             }
+             @Override
+             protected Reserva doBackward(ReservaDto reservaDto) {
+                 return reservaMapperDtoEntity.toEntity(reservaDto);
+             }
+         });
+
+        return pageDto;
     }
 
 
