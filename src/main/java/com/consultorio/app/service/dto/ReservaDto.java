@@ -1,14 +1,9 @@
 package com.consultorio.app.service.dto;
 
-import com.consultorio.app.domain.Reserva;
-import com.consultorio.app.service.mapper.EntityMapper;
-import com.consultorio.app.service.mapper.ReservaMapper;
-
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
-import java.util.List;
 
-public class ReservaDto  {
+public class ReservaDto {
 
     private String nombre;
 
@@ -23,6 +18,8 @@ public class ReservaDto  {
 
     @NotBlank
     private String codigoHora;
+
+    private String horario;
 
     public int getSucursal() {
         return sucursal;
@@ -48,6 +45,10 @@ public class ReservaDto  {
         return codigoHora;
     }
 
+    public String getHorario() {
+        return horario;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -70,5 +71,9 @@ public class ReservaDto  {
 
     public void setCodigoHora(String codigoHora) {
         this.codigoHora = codigoHora;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
     }
 }
