@@ -1,0 +1,57 @@
+<div>
+    
+    <h2>
+        <span id="user-management-page-heading">Listado de reservas</span>
+
+        <!--<button class="btn btn-primary float-right jh-create-entity" [routerLink]="['./new']">
+            <fa-icon icon="plus"></fa-icon> <span>Create a new User</span>
+        </button>
+    -->
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="table-responsive" *ngIf="turnos">
+        <table class="table table-striped" aria-describedby="user-management-page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="transition.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="nombre"><span>Nombre</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="apellido"><span>Apellido</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="documento"><span>Documento</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sucursal"><span>Sucursal</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="fechaTurno"><span>Fecha de turno</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="codigoHora"><span>Codigo</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="horario"><span>Codigo hora</span> <fa-icon icon="sort"></fa-icon></th>
+                </tr>
+            </thead>
+            
+            <tbody *ngIf="turnos">
+                <tr *ngFor="let turno of turnos; trackBy: trackIdentity">
+                    <td>{{ turno.id }}</a></td>
+                    <td>{{ turno.nombre }}</td>
+                    <td>{{ turno.apellido }}</td>
+                    <td>{{ turno.documento }}</td>
+                    <td>{{ turno.sucursal }}</td>
+                    <td>{{ turno.fechaTurno }}</td>
+                    <td>{{ turno.codigoHora }}</td>
+                    <td>{{ turno.horario }}</td>
+                </tr>
+            </tbody>
+        
+        </table>
+    </div>
+<!--
+    <div *ngIf="users">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="transition()"></ngb-pagination>
+        </div>
+    </div>
+    -->
+</div>

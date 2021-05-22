@@ -4,30 +4,35 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption, Pagination } from 'app/shared/util/request-util';
-
-import { Turno } from './Turno';
+import { Fecha } from './Fecha';
+import { Turno } from './model/Turno.model';
 
 @Injectable({ providedIn: 'root' })
 export class ReservaService {
-  public resourceUrl = SERVER_API_URL + 'externos/registrar';
+  public resourceUrl = SERVER_API_URL + 'externos/';
 
   constructor(private http: HttpClient) {}
 
   create(turno: Turno): Observable<Turno> {
-    return this.http.post<Turno>(this.resourceUrl, turno);
+    return this.http.post<Turno>(this.resourceUrl + 'registrar', turno);
   }
 
   update(turno: Turno): Observable<Turno> {
     return this.http.put<Turno>(this.resourceUrl, turno);
   }
 
-  find(login: string): Observable<Turno> {
-    return this.http.get<Turno>(`${this.resourceUrl}/${login}`);
+  consultarfecha(fecha: string): Observable<Fecha> {
+    return this.http.get<Fecha>(`${this.resourceUrl}consultarfecha/${fecha}`);
   }
 
   query(req?: Pagination): Observable<HttpResponse<Turno[]>> {
     const options = createRequestOption(req);
-    return this.http.get<Turno[]>(this.resourceUrl, { params: options, observe: 'response' });
+    return this.http.get<Turno[]>(this.resourceUrl + 'reservas', { params: options, observe: 'response' });
+  }
+
+  mocklist(req?: Pagination): Observable<HttpResponse<Turno[]>> {
+    const options = createRequestOption(req);
+    return this.http.get<Turno[]>('http://localhost:8000/reservas', { params: options, observe: 'response' });
   }
 
   delete(login: string): Observable<{}> {

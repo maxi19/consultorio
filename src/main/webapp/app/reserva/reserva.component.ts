@@ -10,6 +10,8 @@ import { ArrayType } from '@angular/compiler';
 import { HttpResponse } from '@angular/common/http';
 import { ReservaService } from './reserva.service';
 import swal from 'sweetalert';
+import { Fecha } from './Fecha';
+import { pipe } from 'rxjs';
 
 @Component({
   selector: 'jhi-reserva',
@@ -19,7 +21,8 @@ import swal from 'sweetalert';
 export class ReservaComponent implements OnInit {
   formulario!: FormGroup;
   miTurno!: Turno;
-
+  fecha?: Fecha;
+  fechaAconsultar?: string;
   constructor(
     private formBuilder: FormBuilder,
     private calendar: NgbCalendar,
@@ -55,21 +58,23 @@ export class ReservaComponent implements OnInit {
   }
 
   generarReserva(): void {
-    /*this.reservaService
+    this.reservaService
       .create({
         nombre: this.formulario.get('nombre')!.value,
         apellido: this.formulario.get('apellido')!.value,
         documento: this.formulario.get('documento')!.value,
         sucursal: '1',
         fechaTurno: this.formulario.get('fecha')!.value,
-        codigoHora: 1,
+        // codigoHora: 1,
       })
-      .subscribe();
-*/
-    swal({
-      title: 'Good job!',
-      text: 'You clicked the button!',
-      icon: 'success',
+      .subscribe(respuesta => {
+        swal('Se realizo la reserva con exito! ', 'Hace click en ok para descargar el turno!', 'success');
+      });
+  }
+
+  consultarFecha(): void {
+    this.reservaService.consultarfecha(this.formulario.get('fecha')?.value).subscribe(respuesta => {
+      this.fecha = respuesta;
     });
   }
 }

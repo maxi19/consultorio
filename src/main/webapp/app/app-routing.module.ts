@@ -6,6 +6,7 @@ import { DEBUG_INFO_ENABLED } from 'app/app.constants';
 import { Authority } from 'app/shared/constants/authority.constants';
 import { ReservaComponent } from 'app/reserva/reserva.component';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
+import { ReservaListComponent } from './reserva/list/reserva-list/reserva-list.component';
 import { from } from 'rxjs';
 
 const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
@@ -29,6 +30,13 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
         {
           path: 'reserva',
           component: ReservaComponent,
+        },
+        {
+          path: 'listado',
+          component: ReservaListComponent,
+          data: {
+            defaultSort: 'id,asc',
+          },
         },
         ...LAYOUT_ROUTES,
       ],

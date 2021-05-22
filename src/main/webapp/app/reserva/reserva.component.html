@@ -22,9 +22,10 @@
         <input type="fecha" class="form-control" id="Fecha" aria-describedby="fechaHelp" placeholder="Ingrese  la fecha" formControlName="fecha" >
         <small class="form-text text-muted">Ingrese su niumero de documento</small>
       </div>
-      
+      <button type="submit" class="btn btn-primary"    (click)="consultarFecha()" >Submit</button>
 
-    <button type="submit" class="btn btn-primary"   [disabled]="!formulario.valid"  (click)="generarReserva()" >Submit</button>
+          
+      <button type="submit" class="btn btn-primary"   [disabled]="!formulario.valid"  (click)="generarReserva()" >Submit</button>
 
 </form>
 
