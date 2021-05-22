@@ -38,6 +38,7 @@ public class ReservaMapperDtoEntityImp implements ReservaMapperDtoEntity {
     @Override
     public ReservaDto toDto(Reserva entity) {
         ReservaDto reservaDto = new ReservaDto();
+        reservaDto.setId(entity.getId());
         reservaDto.setCodigoHora(entity.getCodigo());
         reservaDto.setDocumento(entity.getDocumento());
         Date input = entity.getFechaTurno().getTime();

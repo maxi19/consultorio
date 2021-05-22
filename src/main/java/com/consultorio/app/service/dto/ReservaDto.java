@@ -5,6 +5,8 @@ import java.time.LocalDate;
 
 public class ReservaDto {
 
+    private Long id;
+
     private String nombre;
 
     private String apellido;
@@ -49,6 +51,10 @@ public class ReservaDto {
         return horario;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -75,5 +81,9 @@ public class ReservaDto {
 
     public void setHorario(String horario) {
         this.horario = horario;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

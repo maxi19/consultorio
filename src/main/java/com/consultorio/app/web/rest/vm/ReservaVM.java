@@ -14,6 +14,8 @@ import java.time.LocalDate;
 
 public class ReservaVM {
 
+    private Long id;
+
     @Size(max = 50)
     @NotBlank
     private String nombre;
@@ -72,6 +74,10 @@ public class ReservaVM {
         return codigoHora;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public void setSucursal(int sucursal) { this.sucursal = sucursal; }
 
     public void setNombre(String nombre) {
@@ -94,6 +100,9 @@ public class ReservaVM {
         this.codigoHora = codigoHora;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {
