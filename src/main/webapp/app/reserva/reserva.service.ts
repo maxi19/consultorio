@@ -9,12 +9,14 @@ import { Turno } from './model/Turno.model';
 
 @Injectable({ providedIn: 'root' })
 export class ReservaService {
-  public resourceUrl = SERVER_API_URL + 'externos/';
+  public resourceUrl = SERVER_API_URL + 'externos/reservas';
+
+  public resourceInternalUrl = SERVER_API_URL + 'internos/reservas';
 
   constructor(private http: HttpClient) {}
 
   create(turno: Turno): Observable<Turno> {
-    return this.http.post<Turno>(this.resourceUrl + 'registrar', turno);
+    return this.http.post<Turno>(this.resourceUrl + '/registrar', turno);
   }
 
   update(turno: Turno): Observable<Turno> {
@@ -27,12 +29,7 @@ export class ReservaService {
 
   query(req?: Pagination): Observable<HttpResponse<Turno[]>> {
     const options = createRequestOption(req);
-    return this.http.get<Turno[]>(this.resourceUrl + 'reservas', { params: options, observe: 'response' });
-  }
-
-  mocklist(req?: Pagination): Observable<HttpResponse<Turno[]>> {
-    const options = createRequestOption(req);
-    return this.http.get<Turno[]>('http://localhost:8000/reservas', { params: options, observe: 'response' });
+    return this.http.get<Turno[]>(this.resourceInternalUrl, { params: options, observe: 'response' });
   }
 
   delete(login: string): Observable<{}> {

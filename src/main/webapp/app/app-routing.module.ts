@@ -29,14 +29,7 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
         },
         {
           path: 'reserva',
-          component: ReservaComponent,
-        },
-        {
-          path: 'listado',
-          component: ReservaListComponent,
-          data: {
-            defaultSort: 'id,asc',
-          },
+          loadChildren: () => import('./reserva/reserva.module').then(m => m.ReservaManagementModule),
         },
         ...LAYOUT_ROUTES,
       ],
