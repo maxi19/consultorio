@@ -4,7 +4,7 @@
             <div class="alert alert-success" *ngSwitchCase="true">
                 <span id="home-logged-message" *ngIf="account">You are logged in as user "{{ account.login }}".</span>
             </div>
-
+<!--
             <div class="alert alert-warning" *ngSwitchCase="false">
                 <a class="alert-link" (click)="login()">sign in</a><span>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>
             </div>
@@ -16,7 +16,13 @@
             <div class="alert alert-warning" *ngSwitchCase="false">
                 <a class="alert-link" routerLink="reserva">Reserva de turnos</a>
             </div>
-
+-->
+            <div class="jumbotron">
+                <h1>Turnos</h1>
+                <p>Saluden gestion de reserva de turnos</p>
+                <p><a class="btn btn-primary btn-lg" routerLink="reserva/registrar/formulario" role="button">Solicitar</a></p>
+            </div>
+            
         </div>
     </div>
 </div>
