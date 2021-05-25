@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/externos")
 public class ReservaResource {
 
     @Autowired
@@ -42,7 +41,7 @@ public class ReservaResource {
         this.horarioService = horarioService;
     }
 
-    @PostMapping("/registrar")
+    @PostMapping("/externos/reservas/registrar")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ReservaDto> registerReserva(@Valid @RequestBody ReservaVM reservaVM) {
         ReservaDto reservaDto = dtoMapper.toDto(reservaVM);
@@ -63,7 +62,7 @@ public class ReservaResource {
     }
 
 
-    @GetMapping("/consultarfecha/{fecha}")
+    @GetMapping("/externos/reservas/consultarfecha/{fecha}")
     public ResponseEntity<Map<Integer, String>> dameHorarios(@PathVariable("fecha") String fecha) {
         String miFecha;
         if (!StringUtils.isEmpty(fecha)){
@@ -73,7 +72,7 @@ public class ReservaResource {
     }
 
 
-    @GetMapping("/reservas")
+    @GetMapping("/internos/reservas")
     public ResponseEntity<List<ReservaVM>> obtenerReservas(Pageable pageable) {
         final Page<ReservaDto> page = reservaService.obtenerTodos(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
