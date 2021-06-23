@@ -46,6 +46,7 @@ public class ReservaMapperDtoEntityImp implements ReservaMapperDtoEntity {
         reservaDto.setFechaTurno(localDate);
         reservaDto.setSucursal(entity.getSucursal());
         reservaDto.setNombre(entity.getNombre());
+        reservaDto.setApellido(entity.getApellido());
         reservaDto.setHorario(entity.getHorario());
         return reservaDto;
     }

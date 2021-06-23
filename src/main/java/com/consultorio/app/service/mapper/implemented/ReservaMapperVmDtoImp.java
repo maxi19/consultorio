@@ -15,6 +15,7 @@ public class ReservaMapperVmDtoImp implements ReservaMapapperVmDto {
         reservaVM.setId(dto.getId());
         reservaVM.setNombre(dto.getNombre());
         reservaVM.setDocumento(dto.getDocumento());
+        reservaVM.setApellido(dto.getApellido());
         reservaVM.setSucursal(dto.getSucursal());
         reservaVM.setCodigoHora(dto.getCodigoHora());
         reservaVM.setFechaTurno(dto.getFechaTurno());
