@@ -3,9 +3,8 @@ import { FormBuilder, FormGroup, FormControl, Validators, NgModel } from '@angul
 import { NgbDateStruct, NgbCalendar, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 
 import { formatDate } from '@angular/common';
-import { Turno } from './turno';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { ITurno, Turno } from '../reserva/model/Turno.model';
 import { ArrayType } from '@angular/compiler';
 import { HttpResponse } from '@angular/common/http';
 import { ReservaService } from './reserva.service';
@@ -20,7 +19,6 @@ import { pipe } from 'rxjs';
 })
 export class ReservaComponent implements OnInit {
   formulario!: FormGroup;
-  miTurno!: Turno;
   fecha?: Fecha;
   fechaAconsultar?: string;
   constructor(

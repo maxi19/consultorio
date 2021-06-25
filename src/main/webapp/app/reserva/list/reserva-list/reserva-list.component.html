@@ -25,12 +25,13 @@
                     <th scope="col"  jhiSortBy="fechaTurno"><span>Fecha de turno</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="codigoHora"><span>Codigo</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="horario"><span>Codigo hora</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             
             <tbody *ngIf="turnos">
                 <tr *ngFor="let turno of turnos; trackBy: trackIdentity">
-                    <td>{{ turno.id }}</a></td>
+                    <td>{{ turno.id }}</td>
                     <td>{{ turno.nombre }}</td>
                     <td>{{ turno.apellido }}</td>
                     <td>{{ turno.documento }}</td>
@@ -38,6 +39,30 @@
                     <td>{{ turno.fechaTurno }}</td>
                     <td>{{ turno.codigoHora }}</td>
                     <td>{{ turno.horario }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                               
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                 
+                                    queryParamsHandling="merge"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="button" (click)="deleteUser(turno)"
+                                    class="btn btn-danger btn-sm" >
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         

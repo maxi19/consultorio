@@ -39,4 +39,8 @@ export class ReservaService {
   authorities(): Observable<string[]> {
     return this.http.get<string[]>(SERVER_API_URL + 'api/users/authorities');
   }
+
+  find(id: string): Observable<Turno> {
+    return this.http.get<Turno>(`${this.resourceUrl}/${id}`);
+  }
 }

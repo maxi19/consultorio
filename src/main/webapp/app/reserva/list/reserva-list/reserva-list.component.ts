@@ -55,18 +55,11 @@ export class ReservaListComponent implements OnInit, OnDestroy {
     }
   }
 
-  //setActive(turno: Turno, isActivated: boolean): void {
-  //  this.userService.update({ ...turno, activated: isActivated }).subscribe(() => this.loadAll());
-  //}
-
   trackIdentity(index: number, item: Turno): any {
     return item.id;
   }
 
-  //deleteUser(user: Turno): void {
-  //  const modalRef = this.modalService.open(UserManagementDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-  //  modalRef.componentInstance.user = user;
-  //}
+  deleteUser(turno: Turno): void {}
 
   transition(): void {
     this.router.navigate(['./'], {
