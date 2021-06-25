@@ -41,6 +41,6 @@ export class ReservaService {
   }
 
   find(id: string): Observable<Turno> {
-    return this.http.get<Turno>(`${this.resourceUrl}/${id}`);
+    return this.http.get<Turno>(`${this.resourceInternalUrl}/buscar/${id}`);
   }
 }

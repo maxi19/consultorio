@@ -9,11 +9,11 @@ import { ReservaManagmentUpdateComponent } from '../reserva/edit/reserva-managme
 import { ReservaManagmentDetailComponent } from '../reserva/detail/reserva-managment-detail/reserva-managment-detail.component';
 
 @Injectable({ providedIn: 'root' })
-export class ReservaResolve implements Resolve<ITurno> {
+export class ReservaResolve implements Resolve<Turno> {
   constructor(private service: ReservaService) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<ITurno> {
-    const id = route.params['login'];
+  resolve(route: ActivatedRouteSnapshot): Observable<Turno> {
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id);
     }
@@ -33,21 +33,21 @@ export const reservaRoute: Routes = [
     path: ':login/view',
     component: ReservaManagmentDetailComponent,
     resolve: {
-      user: ReservaResolve,
+      turno: ReservaResolve,
     },
   },
   {
     path: 'new',
     component: ReservaManagmentUpdateComponent,
     resolve: {
-      user: ReservaResolve,
+      turno: ReservaResolve,
     },
   },
   {
-    path: ':login/edit',
+    path: ':id/edit',
     component: ReservaManagmentUpdateComponent,
     resolve: {
-      user: ReservaResolve,
+      turno: ReservaResolve,
     },
   },
   {

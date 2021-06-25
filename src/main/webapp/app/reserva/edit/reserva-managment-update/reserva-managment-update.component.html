@@ -1,1 +1,27 @@
-<p>reserva-managment-update works!</p>
+<form [formGroup]="editForm">
+    <div class="form-group">
+      <label for="Nombre">Nombre</label>
+      <input type="nombre" class="form-control" id="Nombre" placeholder="Ingrese nombre" formControlName="nombre" >
+      <small  class="form-text text-muted">Ingrese su nombre real.</small>
+    </div>
+    
+    <div class="form-group">
+        <label for="Apellido">Apellido</label>
+        <input type="apellido" class="form-control" id="Apellido"  placeholder="Ingrese apellido" formControlName="apellido" >
+        <small  class="form-text text-muted">Ingrese su apellido real</small>
+      </div>
+
+      <div class="form-group">
+        <label for="Documento">Documento</label>
+        <input type="documento" class="form-control" id="Documento"  placeholder="Ingrese  numero de documento" formControlName="documento" >
+        <small class="form-text text-muted">Ingrese su niumero de documento</small>
+      </div>
+
+      <div class="form-group">
+        <label for="Fecha">Fecha</label>
+        <input type="fecha" class="form-control" id="Fecha"  placeholder="Ingrese  la fecha" formControlName="fecha" >
+        <small class="form-text text-muted">Ingrese su niumero de documento</small>
+      </div>
+
+
+</form>
