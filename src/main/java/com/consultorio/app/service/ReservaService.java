@@ -23,4 +23,6 @@ public interface ReservaService {
 
     public Page<ReservaDto> obtenerTodos(Pageable pageable);
 
+    public ReservaDto buscarPorId(Long id);
+
 }

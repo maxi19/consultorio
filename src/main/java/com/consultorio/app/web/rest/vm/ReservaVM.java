@@ -35,7 +35,7 @@ public class ReservaVM {
     private LocalDate fechaTurno;
 
     @NotBlank
-    private String codigoHora;
+        private String codigoHora;
 
     public ReservaVM(){
         super();

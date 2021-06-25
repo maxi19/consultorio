@@ -79,37 +79,10 @@ public class ReservaResource {
            return new ResponseEntity(page.getContent(), headers, HttpStatus.OK);
     }
 
-
-
-/*
-    @GetMapping("/tutorials/{id}")
-    public ResponseEntity<ReservaDto> getTutorialById(@PathVariable("id") long id) {
-
+    @GetMapping("/internos/reservas/buscar/{id}")
+    public ResponseEntity<ReservaVM> buscar( @PathVariable("id") Long id) {
+        final ReservaDto reserva = reservaService.buscarPorId(id);
+        return new ResponseEntity<ReservaVM>(dtoMapper.toEntity(reserva),HttpStatus.OK) ;
     }
 
-    @PostMapping("/tutorials")
-    public ResponseEntity<Tutorial> createTutorial(@RequestBody Tutorial tutorial) {
-
-    }
-
-    @PutMapping("/tutorials/{id}")
-    public ResponseEntity<Tutorial> updateTutorial(@PathVariable("id") long id, @RequestBody Tutorial tutorial) {
-
-    }
-
-    @DeleteMapping("/tutorials/{id}")
-    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
-
-    }
-
-    @DeleteMapping("/tutorials")
-    public ResponseEntity<HttpStatus> deleteAllTutorials() {
-
-    }
-
-    @GetMapping("/tutorials/published")
-    public ResponseEntity<List<Tutorial>> findByPublished() {
-
-    }
-*/
 }

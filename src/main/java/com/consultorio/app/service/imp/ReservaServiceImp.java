@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReservaServiceImp implements ReservaService {
@@ -72,7 +73,6 @@ public class ReservaServiceImp implements ReservaService {
         return pageDto;
     }
 
-
     public  boolean existeReservaPorCodigo(String codigo) {
         List<Reserva> reservas =  reservaRepository.findByCodigo(codigo);
         if (reservas.isEmpty()){
@@ -80,4 +80,14 @@ public class ReservaServiceImp implements ReservaService {
         }
         return true;
     }
+
+    @Override
+    public ReservaDto buscarPorId(Long id) {
+       Optional<Reserva> reserva =  reservaRepository.findById(id);
+      if (reserva.get() != null){
+          return reservaMapperDtoEntity.toDto(reserva.get());
+      }
+        return null;
+    }
+
 }
