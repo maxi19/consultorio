@@ -5,7 +5,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption, Pagination } from 'app/shared/util/request-util';
 
-import { Turno } from './Turno';
+import { Turno } from './model/Turno.model';
 import { Horario } from './Horario';
 
 @Injectable({ providedIn: 'root' })

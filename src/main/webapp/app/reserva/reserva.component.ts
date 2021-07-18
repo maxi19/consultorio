@@ -5,6 +5,7 @@ import { NgbDateStruct, NgbCalendar, NgbDatepicker } from '@ng-bootstrap/ng-boot
 import { formatDate } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ITurno, Turno } from '../reserva/model/Turno.model';
+import { Sucursal } from '../reserva/model/Sucursal.model';
 import { ArrayType } from '@angular/compiler';
 import { HttpResponse } from '@angular/common/http';
 import { ReservaService } from './reserva.service';
@@ -21,6 +22,18 @@ export class ReservaComponent implements OnInit {
   formulario!: FormGroup;
   fecha?: Fecha;
   fechaAconsultar?: string;
+
+  sucursales: Sucursal[] = [
+    {
+      id: '1',
+      nombre: 'Grand Bourg',
+    },
+    {
+      id: '2',
+      nombre: 'Pablo Nogues',
+    },
+  ];
+
   constructor(
     private formBuilder: FormBuilder,
     private calendar: NgbCalendar,
@@ -33,6 +46,7 @@ export class ReservaComponent implements OnInit {
       nombre: '',
       apellido: '',
       documento: '',
+      telefono: '',
       sucursal: '',
       fecha: '',
       validate: false,
@@ -44,7 +58,8 @@ export class ReservaComponent implements OnInit {
       nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       apellido: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       documento: ['', [Validators.pattern('^[0-9]*$'), Validators.required, Validators.minLength(6), Validators.maxLength(17)]],
-      // sucursal: ['seleccione', [Validators.required]],
+      telefono: ['', [Validators.pattern('^[0-9]*$'), Validators.required, Validators.minLength(6), Validators.maxLength(17)]],
+      sucursal: ['', [Validators.required, Validators.maxLength(1)]],
       fecha: ['', [Validators.minLength(10), Validators.required]],
       validate: '',
     });
@@ -61,7 +76,7 @@ export class ReservaComponent implements OnInit {
         nombre: this.formulario.get('nombre')!.value,
         apellido: this.formulario.get('apellido')!.value,
         documento: this.formulario.get('documento')!.value,
-        sucursal: '1',
+        sucursal: this.formulario.get('sucursal')!.value,
         fechaTurno: this.formulario.get('fecha')!.value,
         // codigoHora: 1,
       })
@@ -74,5 +89,9 @@ export class ReservaComponent implements OnInit {
     this.reservaService.consultarfecha(this.formulario.get('fecha')?.value).subscribe(respuesta => {
       this.fecha = respuesta;
     });
+  }
+
+  sucursalSeleccionada(sucursal: Sucursal): void {
+    this.formulario.controls['sucursal'].setValue(sucursal.id);
   }
 }
