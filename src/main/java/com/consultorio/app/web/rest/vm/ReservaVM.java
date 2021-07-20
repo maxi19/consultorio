@@ -9,6 +9,7 @@ import org.springframework.cloud.cloudfoundry.com.fasterxml.jackson.annotation.J
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -26,8 +27,10 @@ public class ReservaVM {
 
     @Size(max = 15)
     @NotBlank
+    @Pattern(message = "debe ser un numero",regexp = "\\d+")
     private String documento;
 
+    @NotNull
     private int sucursal;
 
     @JsonDeserialize(using = LocalDateDeserializer.class)
@@ -35,7 +38,7 @@ public class ReservaVM {
     private LocalDate fechaTurno;
 
     @NotBlank
-        private String codigoHora;
+    private String codigoHora;
 
     public ReservaVM(){
         super();
@@ -55,11 +58,9 @@ public class ReservaVM {
 
     public int getSucursal() { return sucursal; }
 
-
     public LocalDate getFechaTurno() {
         return fechaTurno;
     }
-
 
     public ReservaVM(String nombre, String apellido, String documento, int sucursal, LocalDate fechaTurno, String codigoHora) {
         this.nombre = nombre;

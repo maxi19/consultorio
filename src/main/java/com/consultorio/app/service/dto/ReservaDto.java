@@ -7,11 +7,17 @@ public class ReservaDto {
 
     private Long id;
 
+    @NotBlank
     private String nombre;
 
+    @NotBlank
     private String apellido;
 
+    @NotBlank
     private String documento;
+
+    @NotBlank
+    private String telefono;
 
     private int sucursal;
 
@@ -21,7 +27,10 @@ public class ReservaDto {
     @NotBlank
     private String codigoHora;
 
+    @NotBlank
     private String horario;
+
+    public Long getId() { return id; }
 
     public int getSucursal() {
         return sucursal;
@@ -51,9 +60,7 @@ public class ReservaDto {
         return horario;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public String getTelefono() {  return telefono; }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -86,4 +93,6 @@ public class ReservaDto {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public void setTelefono(String telefono) { this.telefono = telefono; }
 }

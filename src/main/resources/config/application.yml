@@ -164,7 +164,9 @@ jhipster:
   mail:
     from: consultorio@localhost
   swagger:
-    default-include-pattern: /api/.*
+    #    default-include-pattern: /api/.*
+    #    default-include-pattern: /internos/.*
+    default-include-pattern: /externos/.*
     title: consultorio API
     description: consultorio API documentation
     version: 0.0.1
