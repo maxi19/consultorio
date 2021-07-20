@@ -2,7 +2,7 @@ package com.consultorio.app.helpers;
 
 public enum SucursalesEnum {
 
-    TORTUGITAS01    ("1","TR01","Buenos Aires 2020","Gran Buenos Aires- Tortugitas","011-3045234","1515"),
+    GRANDBOURG    ("1","TR01","Buenos Aires 2020","Gran Buenos Aires- Grand bourg","011-3045234","1515"),
     NOGUES01    ("2","NG01","Marcos Sastre 213","Gran Buenos Aires- Pablo Nogues","011-345632","1453");
 
     private String interno;
