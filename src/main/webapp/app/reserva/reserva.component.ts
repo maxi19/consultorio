@@ -81,9 +81,18 @@ export class ReservaComponent implements OnInit {
         codigoHora: 'h2',
         horario: 'h2',
       })
-      .subscribe(respuesta => {
-        swal('Se realizo la reserva con exito! ', 'Hace click en ok para descargar el turno!', 'success');
-      });
+      .subscribe(
+        respuesta => {
+          swal('Se realizo la reserva con exito! ', 'Hace click en ok para descargar el turno!', 'success');
+        },
+        error => {
+          swal({
+            title: 'Se produjo un error en el servicio!',
+            text: 'ese horario ya esta reservado!',
+            icon: 'error',
+          });
+        }
+      );
   }
 
   consultarFecha(): void {
