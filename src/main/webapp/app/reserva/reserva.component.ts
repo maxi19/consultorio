@@ -77,8 +77,9 @@ export class ReservaComponent implements OnInit {
         apellido: this.formulario.get('apellido')!.value,
         documento: this.formulario.get('documento')!.value,
         sucursal: this.formulario.get('sucursal')!.value,
-        fechaTurno: this.formulario.get('fecha')!.value,
-        // codigoHora: 1,
+        fechaTurno: formatDate(this.formulario.get('fecha')!.value, 'yyyy-MM-dd', 'en-US'),
+        codigoHora: 'h2',
+        horario: 'h2',
       })
       .subscribe(respuesta => {
         swal('Se realizo la reserva con exito! ', 'Hace click en ok para descargar el turno!', 'success');
@@ -93,5 +94,6 @@ export class ReservaComponent implements OnInit {
 
   sucursalSeleccionada(sucursal: Sucursal): void {
     this.formulario.controls['sucursal'].setValue(sucursal.id);
+    this.calendar.getWeekday;
   }
 }

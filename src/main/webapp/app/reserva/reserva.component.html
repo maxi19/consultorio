@@ -12,14 +12,14 @@
       </div>
 
     <div class="form-group">
-        <label for="Documento">Telefono</label>
-        <input type="documento" class="form-control" id="Documento" aria-describedby="emailHelp" placeholder="Ingrese su telefono" formControlName="telefono" >
+        <label for="Documento">Documento</label>
+        <input type="documento" class="form-control" id="Documento" aria-describedby="emailHelp" placeholder="Ingrese  numero de documento" formControlName="documento" >
         <small class="form-text text-muted">Ingrese su numero de telefono</small>
     </div>
 
     <div class="form-group">
       <label for="Documento">Telefono</label>
-      <input type="documento" class="form-control" id="Documento" aria-describedby="emailHelp" placeholder="Ingrese  numero de documento" formControlName="telefono" >
+      <input type="documento" class="form-control" id="telefono" aria-describedby="emailHelp" placeholder="Ingrese  numero de telefono" formControlName="telefono" >
       <small class="form-text text-muted">Ingrese su niumero de documento</small>
     </div>
  
@@ -35,15 +35,11 @@
       <input type="hidden" id="sucursal" name="sucursal" formControlName="sucursal">
     </div>
 
-      <div class="form-group">
-        <label for="Fecha">Fecha</label>
-        <input type="fecha" class="form-control" id="Fecha" aria-describedby="fechaHelp" placeholder="Ingrese  la fecha" formControlName="fecha" >
-        <small class="form-text text-muted">Ingrese su niumero de documento</small>
-      </div>
-      <button type="submit" class="btn btn-primary"    (click)="consultarFecha()" >Submit</button> 
-      <button type="submit" class="btn btn-primary"   [disabled]="!formulario.valid"  (click)="generarReserva()" >Submit</button>
+    <div>
+      <jhi-datepicker [miParentForm]="formulario" [miFormLabel]="'Fecha de turno:'" [miFormControlName]="'fecha'"></jhi-datepicker>
+    </div>
+    
+
+      <button type="submit" class="btn btn-primary"    (click)="generarReserva()" >Submit</button>
 
 </form>
-
-
-  
