@@ -73,7 +73,7 @@ export class ReservaComponent implements OnInit {
     this.setearValoresDefault();
   }
 
-  generarReserva(): void {
+  generarReserva(horario: Horario): void {
     this.reservaService
       .create({
         nombre: this.formulario.get('nombre')!.value,
@@ -81,8 +81,8 @@ export class ReservaComponent implements OnInit {
         documento: this.formulario.get('documento')!.value,
         sucursal: this.formulario.get('sucursal')!.value,
         fechaTurno: formatDate(this.formulario.get('fecha')!.value, 'yyyy-MM-dd', 'en-US'),
-        codigoHora: 'h2',
-        horario: 'h2',
+        codigoHora: horario.codigo,
+        horario: horario.codigo,
       })
       .subscribe(
         respuesta => {
