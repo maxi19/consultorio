@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
@@ -76,7 +73,7 @@ public class HorarioResource {
 
         List<HorarioDto> horarios = horarioService.dameHorarios();
         List<HorarioVm> horariosVm = mapper.toDto(horarios);
-
+/*
         Map<String, List<HorarioVm>> mapHorarios = new HashMap<>();
 
         Date currentDate = new Date();
@@ -90,8 +87,20 @@ public class HorarioResource {
             String date = sdf.format(c.getTime());
             mapHorarios.put(date, horariosVm);
         }
+*/
+        return new ResponseEntity (horariosVm , HttpStatus.OK);
+    }
 
-        return new ResponseEntity (mapHorarios , HttpStatus.OK);
+    @PostMapping("/crearHorario/crear")
+    @ResponseStatus(HttpStatus.CREATED)
+
+    public ResponseEntity<HttpStatus> crearHorario( @Valid @RequestBody HorarioVm  horario) {
+        try {
+            horarioService.crearHorario(horario.getCodigo(),horario.getDescripcion());
+        }catch (Exception e){
+            return new ResponseEntity (HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity (HttpStatus.OK);
     }
 
 }

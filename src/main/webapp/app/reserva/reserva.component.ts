@@ -4,11 +4,10 @@ import { NgbDateStruct, NgbCalendar, NgbDatepicker } from '@ng-bootstrap/ng-boot
 
 import { formatDate } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ITurno, Turno } from '../reserva/model/Turno.model';
 import { Sucursal } from '../reserva/model/Sucursal.model';
-import { ArrayType } from '@angular/compiler';
-import { HttpResponse } from '@angular/common/http';
 import { ReservaService } from './reserva.service';
+import { HorarioService } from './horarios.service';
+import { Horario } from '../reserva/model/Horario.model';
 import swal from 'sweetalert';
 import { Fecha } from './Fecha';
 import { pipe } from 'rxjs';
@@ -22,7 +21,8 @@ export class ReservaComponent implements OnInit {
   formulario!: FormGroup;
   fecha?: Fecha;
   fechaAconsultar?: string;
-
+  mostrarHorarios?: boolean;
+  horarios?: Horario[];
   sucursales: Sucursal[] = [
     {
       id: '1',
@@ -38,8 +38,11 @@ export class ReservaComponent implements OnInit {
     private formBuilder: FormBuilder,
     private calendar: NgbCalendar,
     private ngbModalRef: NgbModal,
-    public reservaService: ReservaService
-  ) {}
+    public reservaService: ReservaService,
+    private horarioService: HorarioService
+  ) {
+    this.mostrarHorarios = false;
+  }
 
   setearValoresDefault(): void {
     this.formulario.setValue({
@@ -102,7 +105,26 @@ export class ReservaComponent implements OnInit {
   }
 
   sucursalSeleccionada(sucursal: Sucursal): void {
-    this.formulario.controls['sucursal'].setValue(sucursal.id);
-    this.calendar.getWeekday;
+    if (sucursal != null) {
+      this.formulario.controls['sucursal'].setValue(sucursal.id);
+      this.calendar.getWeekday;
+      this.mostrarHorarios = true;
+      this.cargarHorarios(sucursal.id);
+    }
+  }
+
+  cargarHorarios(id: string): void {
+    this.horarioService.consultarhorarios(id).subscribe(
+      resp => {
+        this.horarios = resp;
+      },
+      error => {
+        swal({
+          title: 'Se produjo un error en el servicio!',
+          text: 'Error en el servicio, intentelo mas tarde!',
+          icon: 'error',
+        });
+      }
+    );
   }
 }

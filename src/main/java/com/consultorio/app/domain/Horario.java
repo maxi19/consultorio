@@ -16,6 +16,14 @@ public class Horario implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
+    public Horario(String codigo, String descripcion) {
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+    }
+
+    public Horario(){
+
+    }
     public String getCodigo() {
         return codigo;
     }
