@@ -4,16 +4,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription, combineLatest } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router, Data } from '@angular/router';
 import { JhiEventManager } from 'ng-jhipster';
+import swal from 'sweetalert';
 
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
+
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
 import { UserService } from 'app/core/user/user.service';
 import { Turno } from '../../model/Turno.model';
 import { ReservaService } from '../../reserva.service';
-
-import { UserManagementDeleteDialogComponent } from '../../../../app/admin/user-management/user-management-delete-dialog.component';
-import { parseMetadata } from '@angular/localize/src/utils';
 
 @Component({
   selector: 'jhi-reserva-list',
@@ -59,8 +58,6 @@ export class ReservaListComponent implements OnInit, OnDestroy {
     return item.id;
   }
 
-  deleteUser(turno: Turno): void {}
-
   transition(): void {
     this.router.navigate(['./'], {
       relativeTo: this.activatedRoute.parent,
@@ -103,5 +100,29 @@ export class ReservaListComponent implements OnInit, OnDestroy {
   private onSuccess(turno: Turno[] | null, headers: HttpHeaders): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.turnos = turno;
+  }
+
+  public eliminarReserva(turno: Turno, i: number): void {
+    swal({
+      title: 'Confirmacion de eliminacion',
+      text: '¿esta seguro que desea borrar esta reserva?',
+      icon: 'warning',
+      buttons: ['cancelar', 'aceptar'],
+      dangerMode: true,
+    }).then(willDelete => {
+      if (willDelete) {
+        this.turnos?.splice(i, 1);
+        this.reservaService.delete(turno).subscribe(
+          resp => {
+            swal('¡Tu reserva ha sido eliminada!', {
+              icon: 'success',
+            });
+          },
+          error => {}
+        );
+      } else {
+        swal('Operacion cancelada!');
+      }
+    });
   }
 }

@@ -1,16 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, NgModel } from '@angular/forms';
-import { NgbDateStruct, NgbCalendar, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
-
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { formatDate } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Sucursal } from '../reserva/model/Sucursal.model';
+import swal from 'sweetalert';
+
 import { ReservaService } from './reserva.service';
 import { HorarioService } from './horarios.service';
+import { Sucursal } from '../reserva/model/Sucursal.model';
 import { Horario } from '../reserva/model/Horario.model';
-import swal from 'sweetalert';
 import { Fecha } from './Fecha';
-import { pipe } from 'rxjs';
 
 @Component({
   selector: 'jhi-reserva',
@@ -23,6 +22,7 @@ export class ReservaComponent implements OnInit {
   fechaAconsultar?: string;
   mostrarHorarios?: boolean;
   horarios?: Horario[];
+
   sucursales: Sucursal[] = [
     {
       id: '1',

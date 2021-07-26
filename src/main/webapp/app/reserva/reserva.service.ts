@@ -32,8 +32,8 @@ export class ReservaService {
     return this.http.get<Turno[]>(this.resourceInternalUrl, { params: options, observe: 'response' });
   }
 
-  delete(login: string): Observable<{}> {
-    return this.http.delete(`${this.resourceUrl}/${login}`);
+  delete(turno: Turno): Observable<any> {
+    return this.http.post<Turno>(`${this.resourceInternalUrl}/eliminar/`, turno);
   }
 
   authorities(): Observable<string[]> {
