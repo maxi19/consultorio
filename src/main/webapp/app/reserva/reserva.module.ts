@@ -6,10 +6,17 @@ import { ReservaListComponent } from './list/reserva-list/reserva-list.component
 import { ReservaComponent } from './reserva.component';
 import { ReservaManagmentDetailComponent } from './detail/reserva-managment-detail/reserva-managment-detail.component';
 import { ReservaManagmentUpdateComponent } from './edit/reserva-managment-update/reserva-managment-update.component';
+import { DatepickerComponent } from './datepicker/datepicker.component';
 
 @NgModule({
   imports: [ConsultorioSharedModule, RouterModule.forChild(reservaRoute)],
-  declarations: [ReservaListComponent, ReservaComponent, ReservaManagmentDetailComponent, ReservaManagmentUpdateComponent],
+  declarations: [
+    ReservaListComponent,
+    ReservaComponent,
+    ReservaManagmentDetailComponent,
+    ReservaManagmentUpdateComponent,
+    DatepickerComponent,
+  ],
   entryComponents: [],
 })
 export class ReservaManagementModule {}

@@ -43,7 +43,7 @@ public class ReservaResource {
 
     @PostMapping("/externos/reservas/registrar")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<ReservaDto> registerReserva(@Valid @RequestBody ReservaVM reservaVM) {
+    public ResponseEntity<ReservaDto> registerReserva(@Valid  @RequestBody ReservaVM reservaVM) {
         ReservaDto reservaDto = dtoMapper.toDto(reservaVM);
 
         GregorianCalendar gc = new GregorianCalendar();

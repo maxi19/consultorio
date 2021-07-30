@@ -1,18 +1,29 @@
 package com.consultorio.app.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Horario {
+public class Horario implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+
     @Column(name = "codigo")
     private String codigo;
 
     @Column(name = "descripcion")
     private String descripcion;
 
+    public Horario(String codigo, String descripcion) {
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+    }
+
+    public Horario(){
+
+    }
     public String getCodigo() {
         return codigo;
     }
@@ -27,5 +38,13 @@ public class Horario {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

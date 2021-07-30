@@ -14,4 +14,7 @@ public interface HorarioService {
 
     public List<HorarioDto> dameHorarios();
 
+    public void crearHorario(String codigo, String descripcion) throws  Exception;
+
+    public void eliminarHorario(long id) throws  Exception;
 }

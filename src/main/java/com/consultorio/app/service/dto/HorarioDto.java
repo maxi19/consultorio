@@ -4,6 +4,8 @@ import javax.persistence.Column;
 
 public class HorarioDto {
 
+    private Long id;
+
     private String codigo;
 
     private String descripcion;
@@ -12,6 +14,16 @@ public class HorarioDto {
         this.codigo = codigo;
         this.descripcion = descripcion;
     }
+
+    public HorarioDto(long id, String codigo, String descripcion) {
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+        this.id = id;
+    }
+
+    public void setId(Long id) { this.id = id; }
+
+    public Long getId() { return id; }
 
     public String getCodigo() {
         return codigo;
