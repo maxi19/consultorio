@@ -85,4 +85,10 @@ public class ReservaResource {
         return new ResponseEntity<ReservaVM>(dtoMapper.toEntity(reserva),HttpStatus.OK) ;
     }
 
+    @PostMapping("internos/reservas/eliminar/")
+    public ResponseEntity<Void> eliominarReserva(@Valid  @RequestBody ReservaVM reservaVM) throws Exception {
+        reservaService.eliminarReserva(dtoMapper.toDto(reservaVM));
+        return new ResponseEntity (HttpStatus.NO_CONTENT);
+    }
+
 }

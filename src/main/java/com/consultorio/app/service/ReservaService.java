@@ -15,6 +15,8 @@ public interface ReservaService {
 
      public ReservaDto persistir(ReservaDto reserva);
 
+     public void eliminarReserva(ReservaDto reservaDto) throws Exception;
+
      public boolean existeReservaPorDocumento(String dcumento);
 
      public  boolean existeReservaPorHorarioYFecha(String horario, Calendar fecha);

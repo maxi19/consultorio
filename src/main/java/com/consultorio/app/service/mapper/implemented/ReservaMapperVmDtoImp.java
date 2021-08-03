@@ -14,17 +14,18 @@ public class ReservaMapperVmDtoImp implements ReservaMapapperVmDto {
         ReservaVM reservaVM = new ReservaVM();
         reservaVM.setId(dto.getId());
         reservaVM.setNombre(dto.getNombre());
-        reservaVM.setDocumento(dto.getDocumento());
         reservaVM.setApellido(dto.getApellido());
+        reservaVM.setDocumento(dto.getDocumento());
         reservaVM.setSucursal(dto.getSucursal());
-        reservaVM.setCodigoHora(dto.getCodigoHora());
         reservaVM.setFechaTurno(dto.getFechaTurno());
+        reservaVM.setCodigoHora(dto.getCodigoHora());
         return reservaVM;
     }
 
     @Override
     public ReservaDto toDto(ReservaVM entity) {
         ReservaDto reservaDto = new ReservaDto();
+        reservaDto.setId(entity.getId());
         reservaDto.setNombre(entity.getNombre());
         reservaDto.setApellido(entity.getApellido());
         reservaDto.setDocumento(entity.getDocumento());

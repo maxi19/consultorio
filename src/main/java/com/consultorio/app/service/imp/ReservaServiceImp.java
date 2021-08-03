@@ -90,4 +90,12 @@ public class ReservaServiceImp implements ReservaService {
         return null;
     }
 
+    @Override
+    public void eliminarReserva(ReservaDto reservaDto) throws Exception {
+        Optional<Reserva> reserva = reservaRepository.findById(reservaDto.getId());
+            if (reserva.get()  == null){
+                throw new Exception("La reserva no existe");
+           }
+            reservaRepository.delete(reserva.get());
+    }
 }
