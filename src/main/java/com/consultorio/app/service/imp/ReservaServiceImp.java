@@ -6,16 +6,19 @@ import com.consultorio.app.service.ReservaService;
 import com.consultorio.app.service.dto.ReservaDto;
 import com.consultorio.app.service.mapper.ReservaMapperDtoEntity;
 import com.consultorio.app.service.mapper.implemented.ReservaMapperDtoEntityImp;
+import com.consultorio.app.web.rest.AccountResource;
 import com.google.common.base.Converter;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ReservaServiceImp implements ReservaService {
@@ -24,12 +27,22 @@ public class ReservaServiceImp implements ReservaService {
 
     private final ReservaMapperDtoEntity reservaMapperDtoEntity = new ReservaMapperDtoEntityImp();
 
+    private final Logger log = LoggerFactory.getLogger(ReservaServiceImp.class);
+    //private static final String RANGO_DEPURACION="0 0 22 * * ? *";
+    private static final String RANGO_DEPURACION = "15 * * * *";
+
     public ReservaServiceImp(ReservaRepository reservaRepository){
         this.reservaRepository =  reservaRepository;
     }
 
+
     @Override
     public ReservaDto persistir(ReservaDto reserva) {
+        Long id = this.reservaRepository.max();
+        if (id == null)
+            id= new Long(0);
+
+        reserva.setId(id++);
         this.reservaRepository.saveAndFlush(reservaMapperDtoEntity.toEntity(reserva));
      return  reserva;
     }
@@ -90,6 +103,13 @@ public class ReservaServiceImp implements ReservaService {
         return null;
     }
 
+    @Scheduled(fixedDelay = 100000)
+    @Override
+    public void actualzarTablaAutomatica() {
+        reservaRepository.removeOlderThan(obtenerFechaAnterior());
+    }
+
+
     @Override
     public void eliminarReserva(ReservaDto reservaDto) throws Exception {
         Optional<Reserva> reserva = reservaRepository.findById(reservaDto.getId());
@@ -98,4 +118,11 @@ public class ReservaServiceImp implements ReservaService {
            }
             reservaRepository.delete(reserva.get());
     }
+
+    public Calendar obtenerFechaAnterior(){
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeZone(TimeZone.getTimeZone("GMT-3:00"));
+        return new GregorianCalendar(  cal.get(Calendar.YEAR),cal.get(Calendar.MONTH) ,cal.get(Calendar.DAY_OF_MONTH));
+    }
+
 }

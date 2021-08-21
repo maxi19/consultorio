@@ -10,12 +10,15 @@ import com.consultorio.app.service.mapper.implemented.ReservaMapperVmDtoImp;
 import com.consultorio.app.web.rest.vm.ReservaVM;
 import io.github.jhipster.web.util.PaginationUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -90,5 +93,7 @@ public class ReservaResource {
         reservaService.eliminarReserva(dtoMapper.toDto(reservaVM));
         return new ResponseEntity (HttpStatus.NO_CONTENT);
     }
+
+
 
 }
