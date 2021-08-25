@@ -25,10 +25,10 @@ public interface ReservaService {
 
      public List<ReservaDto> buscarPorFecha(Calendar fechaTurno);
 
-    public Page<ReservaDto> obtenerTodos(Pageable pageable);
+     public Page<ReservaDto> obtenerTodos(Pageable pageable);
 
-    public ReservaDto buscarPorId(Long id);
+     public ReservaDto buscarPorId(Long id);
 
-    public void actualzarTablaAutomatica();
+     public void actualzarTablaAutomatica();
 
 }

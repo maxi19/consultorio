@@ -11,6 +11,7 @@ import com.google.common.base.Converter;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,8 +29,9 @@ public class ReservaServiceImp implements ReservaService {
     private final ReservaMapperDtoEntity reservaMapperDtoEntity = new ReservaMapperDtoEntityImp();
 
     private final Logger log = LoggerFactory.getLogger(ReservaServiceImp.class);
-    //private static final String RANGO_DEPURACION="0 0 22 * * ? *";
-    private static final String RANGO_DEPURACION = "15 * * * *";
+
+    @Value("${reservas.depuracion}")
+    private  static final String tiempoDepuracion="0 0 1 * * *";
 
     public ReservaServiceImp(ReservaRepository reservaRepository){
         this.reservaRepository =  reservaRepository;
@@ -103,7 +105,7 @@ public class ReservaServiceImp implements ReservaService {
         return null;
     }
 
-    @Scheduled(fixedDelay = 100000)
+    @Scheduled(cron = tiempoDepuracion)
     @Override
     public void actualzarTablaAutomatica() {
         reservaRepository.removeOlderThan(obtenerFechaAnterior());
