@@ -26,6 +26,9 @@ public class Reserva implements Serializable {
     @Column(name = "documento")
     private String documento;
 
+    @Column(name = "telefono")
+    private String telefono;
+
     @Column(name = "fecha", updatable = false, nullable = false)
     @Temporal(TemporalType.DATE)
     private Calendar fecha;
@@ -114,5 +117,13 @@ public class Reserva implements Serializable {
 
     public void setHorario(String horario) {
         this.horario = horario;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 }

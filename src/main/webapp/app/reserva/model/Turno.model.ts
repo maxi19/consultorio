@@ -5,6 +5,7 @@ export interface ITurno {
   nombre?: string;
   apellido?: string;
   documento?: string;
+  telefono?: string;
   sucursal?: string;
   fechaTurno?: string;
   codigoHora?: string;
@@ -17,6 +18,7 @@ export class Turno implements ITurno {
     public nombre?: string,
     public apellido?: string,
     public documento?: string,
+    public telefono?: string,
     public sucursal?: string,
     public fechaTurno?: string,
     public codigoHora?: string,

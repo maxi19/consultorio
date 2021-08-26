@@ -4,27 +4,20 @@ import com.consultorio.app.helpers.RangoHorario;
 import com.consultorio.app.service.HorarioService;
 import com.consultorio.app.service.ReservaService;
 import com.consultorio.app.service.dto.ReservaDto;
-import com.consultorio.app.service.dto.UserDTO;
 import com.consultorio.app.service.mapper.ReservaMapapperVmDto;
-import com.consultorio.app.service.mapper.implemented.ReservaMapperVmDtoImp;
 import com.consultorio.app.web.rest.vm.ReservaVM;
 import io.github.jhipster.web.util.PaginationUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
@@ -37,8 +30,6 @@ public class ReservaResource {
     @Autowired
     private HorarioService horarioService;
 
-    private ReservaMapapperVmDto dtoMapper = new ReservaMapperVmDtoImp();
-
     public ReservaResource(ReservaService reservaService, HorarioService horarioService){
         this.reservaService = reservaService;
         this.horarioService = horarioService;
@@ -46,16 +37,9 @@ public class ReservaResource {
 
     @PostMapping("/externos/reservas/registrar")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<ReservaDto> registerReserva(@Valid  @RequestBody ReservaVM reservaVM) {
-        ReservaDto reservaDto = dtoMapper.toDto(reservaVM);
+    public ResponseEntity<ReservaDto> registerReserva(@Valid  @RequestBody ReservaDto reservaDto) {
 
-        GregorianCalendar gc = new GregorianCalendar();
-        gc.set(GregorianCalendar.YEAR, reservaDto.getFechaTurno().getYear());
-        gc.set(GregorianCalendar.MONTH, reservaDto.getFechaTurno().getMonthValue()-1);
-        gc.set(GregorianCalendar.DATE, reservaDto.getFechaTurno().getDayOfMonth());
-        Calendar fechaTurno = gc;
-
-        if (reservaService.existeReservaPorHorarioYFecha(reservaDto.getCodigoHora(),fechaTurno)){
+        if (reservaService.existeReservaPorHorarioYFecha(reservaDto.getCodigoHora(),reservaDto.getFechaTurno())){
             ResponseEntity<ReservaDto> reservaDtoResponseEntity = new ResponseEntity<ReservaDto>(reservaDto, HttpStatus.UNPROCESSABLE_ENTITY);
             return reservaDtoResponseEntity;
         }
@@ -83,14 +67,14 @@ public class ReservaResource {
     }
 
     @GetMapping("/internos/reservas/buscar/{id}")
-    public ResponseEntity<ReservaVM> buscar( @PathVariable("id") Long id) {
-        final ReservaDto reserva = reservaService.buscarPorId(id);
-        return new ResponseEntity<ReservaVM>(dtoMapper.toEntity(reserva),HttpStatus.OK) ;
+    public ResponseEntity<ReservaDto> buscar( @PathVariable("id") Long id) {
+        ReservaDto reserva = reservaService.buscarPorId(id);
+        return new ResponseEntity<>(reserva,HttpStatus.OK) ;
     }
 
     @PostMapping("internos/reservas/eliminar/")
-    public ResponseEntity<Void> eliominarReserva(@Valid  @RequestBody ReservaVM reservaVM) throws Exception {
-        reservaService.eliminarReserva(dtoMapper.toDto(reservaVM));
+    public ResponseEntity<Void> eliominarReserva(@Valid  @RequestBody ReservaDto reservaDto) throws Exception {
+        reservaService.eliminarReserva(reservaDto);
         return new ResponseEntity (HttpStatus.NO_CONTENT);
     }
 

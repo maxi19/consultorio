@@ -79,6 +79,7 @@ export class ReservaComponent implements OnInit {
         nombre: this.formulario.get('nombre')!.value,
         apellido: this.formulario.get('apellido')!.value,
         documento: this.formulario.get('documento')!.value,
+        telefono: this.formulario.get('telefono')!.value,
         sucursal: this.formulario.get('sucursal')!.value,
         fechaTurno: formatDate(this.formulario.get('fecha')!.value, 'yyyy-MM-dd', 'en-US'),
         codigoHora: horario.codigo,

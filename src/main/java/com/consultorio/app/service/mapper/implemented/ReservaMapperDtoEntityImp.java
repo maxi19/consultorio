@@ -23,13 +23,10 @@ public class ReservaMapperDtoEntityImp implements ReservaMapperDtoEntity {
         rev.setNombre(dto.getNombre());
         rev.setApellido(dto.getApellido());
         rev.setDocumento(dto.getDocumento());
+        rev.setTelefono(dto.getTelefono());
         rev.setFecha(new GregorianCalendar());
-        rev.setSucursal(dto.getSucursal());
-        GregorianCalendar gc = new GregorianCalendar();
-        gc.set(GregorianCalendar.YEAR, dto.getFechaTurno().getYear());
-        gc.set(GregorianCalendar.MONTH, dto.getFechaTurno().getMonthValue()-1);
-        gc.set(GregorianCalendar.DATE, dto.getFechaTurno().getDayOfMonth());
-        rev.setFechaTurno(gc);
+        rev.setSucursal(dto.getSucursal());;
+        rev.setFechaTurno(dto.getFechaTurno());
         rev.setCodigo(TurnosHelper.generarCodigo(dto.getDocumento(),1));
         rev.setHorario(StringUtils.upperCase(dto.getHorario()));
         return rev;
@@ -41,9 +38,8 @@ public class ReservaMapperDtoEntityImp implements ReservaMapperDtoEntity {
         reservaDto.setId(entity.getId());
         reservaDto.setCodigoHora(entity.getCodigo());
         reservaDto.setDocumento(entity.getDocumento());
-        Date input = entity.getFechaTurno().getTime();
-        LocalDate localDate = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        reservaDto.setFechaTurno(localDate);
+        reservaDto.setTelefono(entity.getTelefono());
+        reservaDto.setFechaTurno(entity.getFechaTurno());
         reservaDto.setSucursal(entity.getSucursal());
         reservaDto.setNombre(entity.getNombre());
         reservaDto.setApellido(entity.getApellido());

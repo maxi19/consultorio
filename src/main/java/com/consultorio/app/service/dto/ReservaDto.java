@@ -1,8 +1,15 @@
 package com.consultorio.app.service.dto;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Calendar;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ReservaDto {
 
     private Long id;
@@ -19,10 +26,11 @@ public class ReservaDto {
     @NotBlank
     private String telefono;
 
+    @NotNull
     private int sucursal;
 
-    @NotBlank
-    private LocalDate fechaTurno;
+    @NotNull
+    private Calendar fechaTurno;
 
     @NotBlank
     private String codigoHora;
@@ -30,69 +38,18 @@ public class ReservaDto {
     @NotBlank
     private String horario;
 
-    public Long getId() { return id; }
-
-    public int getSucursal() {
-        return sucursal;
+    @Override
+    public String toString() {
+        return "ReservaDto{" +
+            "id=" + id +
+            ", nombre='" + nombre + '\'' +
+            ", apellido='" + apellido + '\'' +
+            ", documento='" + documento + '\'' +
+            ", telefono='" + telefono + '\'' +
+            ", sucursal=" + sucursal +
+            ", fechaTurno=" + fechaTurno +
+            ", codigoHora='" + codigoHora + '\'' +
+            ", horario='" + horario + '\'' +
+            '}';
     }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public String getDocumento() {
-        return documento;
-    }
-
-    public LocalDate getFechaTurno() {
-        return fechaTurno;
-    }
-
-    public String getCodigoHora() {
-        return codigoHora;
-    }
-
-    public String getHorario() {
-        return horario;
-    }
-
-    public String getTelefono() {  return telefono; }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public void setDocumento(String documento) {
-        this.documento = documento;
-    }
-
-    public void setSucursal(int sucursal) {
-        this.sucursal = sucursal;
-    }
-
-    public void setFechaTurno(LocalDate fechaTurno) {
-        this.fechaTurno = fechaTurno;
-    }
-
-    public void setCodigoHora(String codigoHora) {
-        this.codigoHora = codigoHora;
-    }
-
-    public void setHorario(String horario) {
-        this.horario = horario;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setTelefono(String telefono) { this.telefono = telefono; }
 }
