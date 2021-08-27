@@ -1,6 +1,7 @@
 package com.consultorio.app.web.rest;
 
 import com.consultorio.app.helpers.RangoHorario;
+import com.consultorio.app.manager.ReservaManager;
 import com.consultorio.app.service.HorarioService;
 import com.consultorio.app.service.ReservaService;
 import com.consultorio.app.service.dto.ReservaDto;
@@ -25,27 +26,16 @@ import java.util.Map;
 public class ReservaResource {
 
     @Autowired
-    private ReservaService reservaService;
+    private ReservaManager reservaManager;
 
-    @Autowired
-    private HorarioService horarioService;
-
-    public ReservaResource(ReservaService reservaService, HorarioService horarioService){
-        this.reservaService = reservaService;
-        this.horarioService = horarioService;
+    public ReservaResource(ReservaManager reservaManager ){
+        this.reservaManager =  reservaManager;
     }
 
     @PostMapping("/externos/reservas/registrar")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<ReservaDto> registerReserva(@Valid  @RequestBody ReservaDto reservaDto) {
-
-        if (reservaService.existeReservaPorHorarioYFecha(reservaDto.getCodigoHora(),reservaDto.getFechaTurno())){
-            ResponseEntity<ReservaDto> reservaDtoResponseEntity = new ResponseEntity<ReservaDto>(reservaDto, HttpStatus.UNPROCESSABLE_ENTITY);
-            return reservaDtoResponseEntity;
-        }
-        reservaService.persistir( reservaDto);
-        ResponseEntity<ReservaDto> reservaDtoResponseEntity = new ResponseEntity<ReservaDto>(reservaDto, HttpStatus.CREATED);
-        return reservaDtoResponseEntity;
+    public ResponseEntity<ReservaDto> registerReserva(@Valid  @RequestBody ReservaDto reservaDto) throws  Exception{
+        return reservaManager.registrarReserva(reservaDto);
     }
 
 
@@ -58,26 +48,19 @@ public class ReservaResource {
      return new ResponseEntity (RangoHorario.dameTodosLosRangos() , HttpStatus.OK);
     }
 
-
     @GetMapping("/internos/reservas")
-    public ResponseEntity<List<ReservaVM>> obtenerReservas(Pageable pageable) {
-        final Page<ReservaDto> page = reservaService.obtenerTodos(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-           return new ResponseEntity(page.getContent(), headers, HttpStatus.OK);
+    public ResponseEntity<List<ReservaDto>> obtenerReservas(Pageable pageable) {
+        return reservaManager.obtenerReservasPorPaginado(pageable);
     }
 
     @GetMapping("/internos/reservas/buscar/{id}")
     public ResponseEntity<ReservaDto> buscar( @PathVariable("id") Long id) {
-        ReservaDto reserva = reservaService.buscarPorId(id);
-        return new ResponseEntity<>(reserva,HttpStatus.OK) ;
+        return reservaManager.buscarReservaPorId((id));
     }
 
     @PostMapping("internos/reservas/eliminar/")
     public ResponseEntity<Void> eliominarReserva(@Valid  @RequestBody ReservaDto reservaDto) throws Exception {
-        reservaService.eliminarReserva(reservaDto);
-        return new ResponseEntity (HttpStatus.NO_CONTENT);
+        return reservaManager.eliminarReserva(reservaDto);
     }
-
-
 
 }
