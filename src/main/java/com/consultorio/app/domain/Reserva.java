@@ -46,6 +46,11 @@ public class Reserva implements Serializable {
     @Column(name = "horario")
     private String horario;
 
+    @Column(name = "origen")
+    private boolean editado;
+
+    @Column(name = "usuario")
+    private String usuario;
 
     public Long getId() {
         return id;
