@@ -27,6 +27,8 @@
             <column name="nombre" type="VARCHAR(255)"/>
             <column name="sucursal" type="INT"/>
             <column name="telefono" type="VARCHAR(255)"/>
+            <column name="origen" type="VARCHAR(255)"/>
+            <column name="usuario" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
 
