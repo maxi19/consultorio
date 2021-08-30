@@ -5,6 +5,7 @@ import com.consultorio.app.helpers.TurnosHelper;
 import com.consultorio.app.service.dto.ReservaDto;
 import com.consultorio.app.service.mapper.ReservaMapperDtoEntity;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -13,6 +14,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+@Component
 public class ReservaMapperDtoEntityImp implements ReservaMapperDtoEntity {
 
     public ReservaMapperDtoEntityImp(){}

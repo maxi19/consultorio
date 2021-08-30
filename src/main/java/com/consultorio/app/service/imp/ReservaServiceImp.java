@@ -11,6 +11,7 @@ import com.google.common.base.Converter;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
@@ -26,7 +27,8 @@ public class ReservaServiceImp implements ReservaService {
 
     private final ReservaRepository reservaRepository;
 
-    private final ReservaMapperDtoEntity reservaMapperDtoEntity = new ReservaMapperDtoEntityImp();
+    @Autowired
+    private ReservaMapperDtoEntity reservaMapperDtoEntity;
 
     private final Logger log = LoggerFactory.getLogger(ReservaServiceImp.class);
 

@@ -2,21 +2,13 @@ package com.consultorio.app.web.rest;
 
 import com.consultorio.app.helpers.RangoHorario;
 import com.consultorio.app.manager.ReservaManager;
-import com.consultorio.app.service.HorarioService;
-import com.consultorio.app.service.ReservaService;
 import com.consultorio.app.service.dto.ReservaDto;
-import com.consultorio.app.service.mapper.ReservaMapapperVmDto;
-import com.consultorio.app.web.rest.vm.ReservaVM;
-import io.github.jhipster.web.util.PaginationUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.List;
