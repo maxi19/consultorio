@@ -5,9 +5,14 @@ import java.util.Calendar;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "reserva")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -52,83 +57,4 @@ public class Reserva implements Serializable {
     @Column(name = "usuario")
     private String usuario;
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public String getDocumento() {
-        return documento;
-    }
-
-    public Calendar getFecha() {
-        return fecha;
-    }
-
-    public int getSucursal() {
-        return sucursal;
-    }
-
-    public Calendar getFechaTurno() {
-        return fechaTurno;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public String getHorario() {
-        return horario;
-    }
-
-    public void setSucursal(int sucursal) {
-        this.sucursal = sucursal;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public void setDocumento(String documento) {
-        this.documento = documento;
-    }
-
-    public void setFecha(Calendar fecha) {
-        this.fecha = fecha;
-    }
-
-    public void setFechaTurno(Calendar fechaTurno) {
-        this.fechaTurno = fechaTurno;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public void setHorario(String horario) {
-        this.horario = horario;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
 }
