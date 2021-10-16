@@ -1,3 +1,3 @@
 export class Sucursal {
-  constructor(public id?: any, public nombre?: string) {}
+  constructor(public id?: any, public nombre?: string, public diasCerrado?: number[]) {}
 }

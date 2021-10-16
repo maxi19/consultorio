@@ -1,7 +1,8 @@
 <label for="{{miFormControlName}}" >{{miFormLabel}}</label>
 <div [formGroup]="miParentForm" >
-            <input  class="form-control" placeholder="yyyy-mm-dd"  name="dp"  formControlName="{{miFormControlName}}" ngbDatepicker #d="ngbDatepicker"  [minDate]="minDate" readonly>
+            <input  class="form-control" placeholder="yyyy-mm-dd" name="dp"  formControlName="{{miFormControlName}}" ngbDatepicker #d="ngbDatepicker"  readonly>
 </div>
 <div class="input-group-append">
     <button class="btn btn-primary btn-lg btn-sm"  (click)="d.toggle()" >Seleccione fecha del turno</button>
 </div>
+

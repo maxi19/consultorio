@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup } from '@angular/forms';
 
 const now = new Date();
@@ -10,11 +10,22 @@ const now = new Date();
   styleUrls: ['./datepicker.component.scss'],
 })
 export class DatepickerComponent {
-  model!: NgbDateStruct;
-
   @Input() miParentForm!: FormGroup;
   @Input() miFormControlName!: string;
   @Input() miFormLabel!: string;
+  @Input() disabledDaysItem!: number[];
 
-  minDate: NgbDateStruct = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() + 1 };
+  diasNoDisponibles!: number[];
+
+  constructor(ngbDatepicker: NgbDatepickerConfig) {
+    ngbDatepicker.minDate = { year: 2021, month: 10, day: 16 };
+
+    ngbDatepicker.markDisabled = (date: NgbDateStruct) => {
+      const d = new Date(date.year, date.month - 1, date.day);
+      if (this.disabledDaysItem.includes(d.getDay())) {
+        return true;
+      }
+      return false;
+    };
+  }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { formatDate } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import swal from 'sweetalert';
@@ -18,19 +18,22 @@ import { Fecha } from './Fecha';
 })
 export class ReservaComponent implements OnInit {
   formulario!: FormGroup;
+  habilitarCalendrio?: boolean = false;
   fecha?: Fecha;
   fechaAconsultar?: string;
   mostrarHorarios?: boolean;
   horarios?: Horario[];
-
+  diasNohabiles: number[] = [];
   sucursales: Sucursal[] = [
     {
       id: '1',
       nombre: 'Grand Bourg',
+      diasCerrado: [0, 1, 2],
     },
     {
       id: '2',
       nombre: 'Pablo Nogues',
+      diasCerrado: [3, 4, 6],
     },
   ];
 
@@ -88,6 +91,8 @@ export class ReservaComponent implements OnInit {
       .subscribe(
         respuesta => {
           swal('Se realizo la reserva con exito! ', 'Hace click en ok para descargar el turno!', 'success');
+          this.creaarFormulario();
+          this.setearValoresDefault();
         },
         error => {
           swal({
@@ -111,6 +116,8 @@ export class ReservaComponent implements OnInit {
       this.calendar.getWeekday;
       this.mostrarHorarios = true;
       this.cargarHorarios(sucursal.id);
+      this.diasNohabiles = sucursal.diasCerrado!;
+      this.habilitarCalendrio = true;
     }
   }
 
