@@ -1,57 +1,42 @@
-
-
 <div class="row justify-content-md-center">
   <div class="col-md-4">
-  <form [formGroup]="formulario" >  
-    <div class="form-group">
-      <label for="Nombre">Nombre</label>
-      <input type="nombre" class="form-control" id="Nombre" aria-describedby="emailHelp" placeholder="Ingrese nombre" formControlName="nombre" >
-      <small  class="form-text text-muted">Ingrese su nombre real.</small>
-    </div>
-    
-    <div class="form-group">
-        <label for="Apellido">Apellido</label>
-        <input type="apellido" class="form-control" id="Apellido" aria-describedby="emailHelp" placeholder="Ingrese apellido" formControlName="apellido" >
-        <small  class="form-text text-muted">Ingrese su apellido real</small>
-      </div>
 
-    <div class="form-group">
-        <label for="Documento">Documento</label>
-        <input type="documento" class="form-control" id="Documento" aria-describedby="emailHelp" placeholder="Ingrese  numero de documento" formControlName="documento" >
-        <small class="form-text text-muted">Ingrese su numero de telefono</small>
-    </div>
-
-    <div class="form-group">
-      <label for="telefono">Telefono</label>
-      <input type="telefono" class="form-control" id="telefono" aria-describedby="emailHelp" placeholder="Ingrese  numero de telefono" formControlName="telefono" >
-      <small class="form-text text-muted">Ingrese su niumero de telefono</small>
-    </div>
- 
-    <div class="form-group">
-      <div ngbDropdown class="d-inline-block" >
-        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Sucursal</button>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button class="dropdown-item" *ngFor="let suc of sucursales" (click)="sucursalSeleccionada(suc)" > {{suc.nombre}}</button>
-          </div>
-      </div>
-      <input type="hidden" id="sucursal" name="sucursal" formControlName="sucursal">
-    </div>
-
-   <div class="form-group">
-     <jhi-datepicker  *ngIf="habilitarCalendrio" [miParentForm]="formulario" [miFormLabel]="'Fecha de turno:'" [miFormControlName]="'fecha'" [disabledDaysItem]="diasNohabiles" ></jhi-datepicker>     
-  </div>
-   
-    <div class="form-group" *ngIf="mostrarHorarios">
-        <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" >
-          <label ngbButtonLabel class="btn-primary" *ngFor="let horario of horarios">
-            <input ngbButton type="radio" (click)="generarReserva(horario)" > {{horario.descripcion}}
-          </label>
+      <form [formGroup]="formulario" > 
+        <div class="form-group">
+          <jhi-input-group  [miParentForm]="formulario" [labelFor]="'Nombre'" [labelValue]="'Nombre'" [idComponent]="'Nombre'" [plcHolder]="'Ingrese nombre'"  [miFormControlName]="'nombre'" [msgAlert]="'test'" >  </jhi-input-group>
         </div>
-     </div>
+        <div class="form-group">
+          <jhi-input-group  [miParentForm]="formulario" [labelFor]="'Apellido'" [labelValue]="'Apellido'" [idComponent]="'Apellido'" [plcHolder]="'Ingrese apellido'"  [miFormControlName]="'apellido'" [msgAlert]="'test'"></jhi-input-group>
+        </div>
+        <div class="form-group">
+          <jhi-input-group  [miParentForm]="formulario" [labelFor]="'Documento'" [labelValue]="'Documento'" [idComponent]="'Documento'" [plcHolder]="'Ingrese  numero de documento'"  [miFormControlName]="'documento'" [msgAlert]="'test'"></jhi-input-group>    
+        </div>
+        <div class="form-group">
+          <jhi-input-group  [miParentForm]="formulario" [labelFor]="'telefono'" [labelValue]="'Telefono'" [idComponent]="'Telefono'" [plcHolder]="'Ingrese  numero de telefono'"  [miFormControlName]="'telefono'" [msgAlert]="'test'"></jhi-input-group>    
+        </div>
+    
+        <div class="form-group">
+          <div ngbDropdown class="d-inline-block" >
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Sucursal</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button class="dropdown-item" *ngFor="let suc of sucursales" (click)="sucursalSeleccionada(suc)" > {{suc.nombre}}</button>
+              </div>
+          </div>
+          <input type="hidden" id="sucursal" name="sucursal" formControlName="sucursal">
+        </div>
 
-
-</form>
+        <div class="form-group">
+          <jhi-datepicker  *ngIf="habilitarCalendrio" [miParentForm]="formulario" [miFormLabel]="'Fecha de turno:'" [miFormControlName]="'fecha'" [disabledDaysItem]="diasNohabiles" ></jhi-datepicker>     
+        </div>
+      
+        <div class="form-group" *ngIf="mostrarHorarios">
+            <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" >
+              <label ngbButtonLabel class="btn-primary" *ngFor="let horario of horarios">
+                <input ngbButton type="radio" (click)="generarReserva(horario)" > {{horario.descripcion}}
+              </label>
+            </div>
+        </div>
+    </form>
 </div>
-
 </div>
 
