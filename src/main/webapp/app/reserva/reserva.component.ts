@@ -7,6 +7,7 @@ import swal from 'sweetalert';
 
 import { ReservaService } from './reserva.service';
 import { HorarioService } from './horarios.service';
+import { SucursalService } from './sucursal.service';
 import { Sucursal } from '../reserva/model/Sucursal.model';
 import { Horario } from '../reserva/model/Horario.model';
 import { Fecha } from './Fecha';
@@ -24,25 +25,15 @@ export class ReservaComponent implements OnInit {
   mostrarHorarios?: boolean;
   horarios?: Horario[];
   diasNohabiles: number[] = [];
-  sucursales: Sucursal[] = [
-    {
-      id: '1',
-      nombre: 'Grand Bourg',
-      diasCerrado: [0, 1, 2],
-    },
-    {
-      id: '2',
-      nombre: 'Pablo Nogues',
-      diasCerrado: [3, 4, 6],
-    },
-  ];
+  sucursales?: Sucursal[];
 
   constructor(
     private formBuilder: FormBuilder,
     private calendar: NgbCalendar,
     private ngbModalRef: NgbModal,
     public reservaService: ReservaService,
-    private horarioService: HorarioService
+    private horarioService: HorarioService,
+    public sucursalesService: SucursalService
   ) {
     this.mostrarHorarios = false;
   }
@@ -74,6 +65,7 @@ export class ReservaComponent implements OnInit {
   ngOnInit(): void {
     this.creaarFormulario();
     this.setearValoresDefault();
+    this.cargarSucursales();
   }
 
   generarReserva(horario: Horario): void {
@@ -113,6 +105,7 @@ export class ReservaComponent implements OnInit {
   sucursalSeleccionada(sucursal: Sucursal): void {
     if (sucursal != null) {
       this.formulario.controls['sucursal'].setValue(sucursal.id);
+      this.formulario.controls['fecha'].setValue('');
       this.calendar.getWeekday;
       this.mostrarHorarios = true;
       this.cargarHorarios(sucursal.id);
@@ -134,5 +127,10 @@ export class ReservaComponent implements OnInit {
         });
       }
     );
+  }
+  cargarSucursales(): void {
+    this.sucursalesService.consultarSucursales().subscribe(resp => {
+      this.sucursales = resp;
+    });
   }
 }
